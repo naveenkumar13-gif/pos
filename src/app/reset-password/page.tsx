@@ -31,7 +31,7 @@ export default function ResetPasswordPage() {
       <div className="flex justify-center w-full">
         <div className="relative h-[400px] w-[400px] ">
           <Image
-            src={reset_password.src}
+            src={reset_password}
             alt="Logo"
             fill
             className="object-contain"

@@ -7,7 +7,7 @@ import Input from "@/components/inputs";
 import Button from "@/components/button";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAt, faLock } from "@fortawesome/free-solid-svg-icons";
+import { faAt} from "@fortawesome/free-solid-svg-icons";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -21,7 +21,7 @@ export default function ForgotPasswordPage() {
     <div className="flex min-h-svh items-center justify-center gap-5">
       <div className="relative h-[400px] w-[400px] mb-6">
         <Image
-          src={forget_password.src}
+          src={forget_password}
           alt="Logo"
           fill
           className="object-contain"
