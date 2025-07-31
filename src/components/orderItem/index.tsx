@@ -1,8 +1,9 @@
 import useCartStore from "@/store/useCart";
-import { Image } from "antd";
+
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {  faXmark } from "@fortawesome/free-solid-svg-icons";
+import Image from "next/image";
 
 function OrderItem() {
   const { cart, updateQuantity } = useCartStore();
@@ -22,13 +23,13 @@ function OrderItem() {
         >
           <div>
             <Image
-              src={item.img || "/placeholder.png"}
+              src={item.img || "placeholder.png"}
               alt={item.title}
               width={50}
               height={50}
             />
           </div>
-          <div>
+          <div className="flex flex-col items-center ">
             <h3 className="text-lg font-semibold">{item.title}</h3>
             <p className="text-gray-600">₹{item.price}</p>
           </div>
