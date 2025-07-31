@@ -4,30 +4,65 @@ import { product } from "../../../public/images";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import useCartStore from "@/store/useCart";
+
+
 const menuItems = [
   {
+    id: 1,
     title: "Burger",
     price: 199,
-    desc: "Juicy grilled patty topped with melted cheese, fresh lettuce, tomato, and our secret sauce",
+    desc: "Juicy grilled patty topped with melted cheese, fresh lettuce, tomato, and our secret sauce.",
     img: product,
     rating: 5.0,
   },
   {
-    title: "Biriyani",
-    price: 199,
-    desc: "A fragrant rice delight sealed and simmered to perfection every bite bursting with rich.",
+    id: 2,
+    title: "Chicken Biriyani",
+    price: 249,
+    desc: "Aromatic basmati rice with tender chicken, spices, and herbs cooked to perfection.",
     img: product,
-    rating: 5.0,
+    rating: 4.9,
   },
   {
-    title: "Biriyani",
-    price: 199,
-    desc: "A fragrant rice delight sealed and simmered to perfection every bite bursting with rich.",
+    id: 3,
+    title: "Paneer Tikka",
+    price: 179,
+    desc: "Grilled paneer cubes marinated in spiced yogurt served with mint chutney.",
     img: product,
-    rating: 5.0,
+    rating: 4.8,
   },
+  {
+    id: 4,
+    title: "French Fries",
+    price: 99,
+    desc: "Crispy golden fries served with tangy tomato ketchup and cheese dip.",
+    img: product,
+    rating: 4.7,
+  },
+  {
+    id: 5,
+    title: "Veg Pizza",
+    price: 199,
+    desc: "Crispy base loaded with fresh veggies, mozzarella cheese, and tangy sauce.",
+    img: product,
+    rating: 4.6,
+  },
+  {
+    id: 6,
+    title: "Momos",
+    price: 129,
+    desc: "Steamed dumplings filled with spicy vegetables or chicken, served with hot sauce.",
+    img: product,
+    rating: 4.5,
+  },
+
 ];
+
+
+
 function ProductItem() {
+  const {addToCart} = useCartStore();
   return (
     <div className=" grid grid-cols-3 gap-4">
       {menuItems.map((item, index) => (
@@ -51,7 +86,16 @@ function ProductItem() {
                 {item.rating}
                 <FontAwesomeIcon icon={faStar} className="!text-red-500" />
               </span>
-              <Button className="!bg-red-500 !text-white  !rounded-full hover:bg-red-600 transition">
+              <Button
+                className="!bg-red-500 !text-white  !rounded-full hover:bg-red-600 transition"
+                onClick={ () => addToCart({
+                  id: Math.floor(1000 + Math.random() * 9000),
+                  title: item.title,
+                  price: item.price,
+                  quantity: 1,
+                  img: item.img.src
+                })}
+              >
                 Add to Cart
               </Button>
             </div>

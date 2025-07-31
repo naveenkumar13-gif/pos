@@ -8,7 +8,7 @@ function Header() {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
-    <div className="flex-1 w-full   ">
+    <div className="flex-1 w-full  bg-green-500   ">
       <div className="flex items-center justify-around gap-6 !p-4 ">
         <div>
           <h1 className="text-2xl font-bold mr-6">
