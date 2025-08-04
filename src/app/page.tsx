@@ -1,15 +1,12 @@
 "use client";
 import Header from "@/components/header";
 import ProductItem from "@/components/productItem";
-import useCartStore from "@/store/useCart";
-import OrderItem from "@/components/orderItem";
-import AsideBar from "@/components/asideBar";
+import AsideBar from "@/components/cartAside";
+import Aside from "@/components/aside";
 export default function Home() {
-  const { cart,  totalPrice } = useCartStore();
-  console.log(cart);
   return (
     <div className="flex">
-      <aside className="w-16  flex flex-col items-center justify-end pb-8 border-r "></aside>
+      <Aside />
       <div className="flex-1  ">
         <Header />
         <main className="flex-1  !p-4  ">
@@ -19,7 +16,7 @@ export default function Home() {
           </div>
         </main>
       </div>
-    <AsideBar/>
+      <AsideBar />
     </div>
   );
 }

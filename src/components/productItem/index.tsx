@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import useCartStore from "@/store/useCart";
 
-
 const menuItems = [
   {
     id: 1,
@@ -56,13 +55,10 @@ const menuItems = [
     img: product,
     rating: 4.5,
   },
-
 ];
 
-
-
 function ProductItem() {
-  const {addToCart} = useCartStore();
+  const { addToCart } = useCartStore();
   return (
     <div className=" grid grid-cols-3 gap-4">
       {menuItems.map((item, index) => (
@@ -82,19 +78,23 @@ function ProductItem() {
             </div>
             <p className="text-gray-600 text-xs">{item.desc}</p>
             <div className="flex justify-between mt-2">
-              <span className="text-yellow-500">
-                {item.rating}
-                <FontAwesomeIcon icon={faStar} className="!text-red-500" />
-              </span>
+              <div className="flex items-center justify-center gap-1 ">
+                <span className="text-yellow-500">{item.rating}</span>
+                <span>
+                  <FontAwesomeIcon icon={faStar} className="!text-red-500" />
+                </span>
+              </div>
               <Button
                 className="!bg-red-500 !text-white  !rounded-full hover:bg-red-600 transition"
-                onClick={ () => addToCart({
-                  id: Math.floor(1000 + Math.random() * 9000),
-                  title: item.title,
-                  price: item.price,
-                  quantity: 1,
-                  img: item.img.src
-                })}
+                onClick={() =>
+                  addToCart({
+                    id: item.id,
+                    title: item.title,
+                    price: item.price,
+                    quantity: 1,
+                    img: item.img.src,
+                  })
+                }
               >
                 Add to Cart
               </Button>

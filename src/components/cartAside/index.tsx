@@ -1,12 +1,16 @@
+'use client';
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import useCartStore from "@/store/useCart";
 import OrderItem from "../orderItem";
 import Button from "@/components/button/index";
+import { useRouter } from "next/navigation";
 
-function AsideBar() {
+
+function CartAside() {
   const { cart, totalPrice } = useCartStore();
+const route = useRouter()
   return (
     <div className="w-[25%]   !p-4 border-l border-stone-300  ">
       <div className="h-full">
@@ -43,7 +47,7 @@ function AsideBar() {
                     ₹{totalPrice() + 16}
                   </h2>
                 </div>
-                <Button className="!bg-red-500 !text-white !font-bold !text-lg !py-6 !focus:outline-none !focus:border-none !border-none">
+                <Button className="!bg-red-500 !text-white !font-bold !text-lg !py-6 !focus:outline-none !focus:border-none !border-none" onClick={()=>route.push("/productInfo")} >
                   place the Order
                 </Button>
               </div>
@@ -55,4 +59,4 @@ function AsideBar() {
   );
 }
 
-export default AsideBar;
+export default CartAside;

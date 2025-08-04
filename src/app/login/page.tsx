@@ -14,7 +14,6 @@ import { faAt, faLock } from "@fortawesome/free-solid-svg-icons";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,15 +25,19 @@ export default function LoginPage() {
   return (
     <div className="!p-2 max-md:!p-4 ">
       <header className=" max-sm:max-w-2xs max-sm:mx-auto max-sm:text-center  max-sm:hidden">
-        <h1 className="text-2xl font-bold ">
-          Bill <span className="text-red-500">Mate</span>
-        </h1>
+        <Link href={'/'}>
+          <h1 className="text-2xl font-bold ">
+            Bill <span className="text-red-500">Mate</span>
+          </h1>
+        </Link>
       </header>
       <div className=" flex items-center justify-around min-h-screen  max-md:!p-4 max-sm:flex-col ">
         <header className="  hidden max-sm:block ">
+          <Link href={'/'}>
           <h1 className="text-2xl font-bold  max-sm:text-3xl">
             Bill <span className="text-red-500">Mate</span>
           </h1>
+          </Link>
         </header>
         <div className="p-4  flex relative mb-6  w-[462px] h-[398px] max-md:w-[300px] max-md:h-[300px] max-sm:hidden">
           <Image src={login} alt="Logo" fill />
@@ -54,7 +57,7 @@ export default function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="email"
-              className=""
+              className="!pl-10"
             />
           </div>
           <div className="w-full relative">
@@ -63,7 +66,7 @@ export default function LoginPage() {
             </span>
 
             <InputField
-              className=""
+              className="!pl-10"
               type="password"
               name="password"
               value={password}

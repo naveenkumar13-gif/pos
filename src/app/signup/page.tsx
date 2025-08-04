@@ -19,17 +19,21 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="!p-2  ">
+    <div className="!p-2">
       <header className=" max-sm:max-w-2xs max-sm:mx-auto max-sm:text-center  max-sm:hidden">
-        <h1 className="text-2xl font-bold ">
-          Bill <span className="text-red-500">Mate</span>
-        </h1>
+        <Link href={"/"}>
+          <h1 className="text-2xl font-bold ">
+            Bill <span className="text-red-500">Mate</span>
+          </h1>
+        </Link>
       </header>
       <div className=" flex items-center justify-center gap-6 min-h-screen max-md:!p-4 max-sm:flex-col ">
         <header className="  hidden max-sm:block">
-          <h1 className="text-2xl font-bold  max-sm:text-3xl">
-            Bill <span className="text-red-500">Mate</span>
-          </h1>
+          <Link href={"/"}>
+            <h1 className="text-2xl font-bold  max-sm:text-3xl">
+              Bill <span className="text-red-500">Mate</span>
+            </h1>
+          </Link>
         </header>
         <div className="p-4 flex relative mb-6  w-[500px] h-[400px] max-sm:hidden ">
           <Image src={signup} alt="Logo" fill />
@@ -50,7 +54,7 @@ export default function SignupPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className=" w-full"
+              className=" w-full !pl-10"
               placeholder="email"
             />
           </div>
@@ -62,7 +66,7 @@ export default function SignupPage() {
             </div>
 
             <InputField
-              className=""
+              className="!pl-10"
               type="password"
               name="password"
               value={password}
@@ -79,7 +83,7 @@ export default function SignupPage() {
             </div>
 
             <InputField
-              className=""
+              className="!pl-10"
               type="password"
               name="confirmPassword"
               value={confirmPassword}

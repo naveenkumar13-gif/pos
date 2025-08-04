@@ -21,7 +21,8 @@ function Input({
   className,
   required = false,
 }: InputProps) {
-   const baseClasses = "!px-4 !py-2 focus:ring-1 rounded border w-full focus:outline-none focus:ring-red-500 !pl-10";
+  const baseClasses =
+    "!px-4 !py-2 focus:ring-1 rounded border w-full focus:outline-none focus:ring-red-500 ";
   return (
     <input
       type={type}

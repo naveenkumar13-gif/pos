@@ -9,6 +9,7 @@ import { reset_password } from "../../../public/images";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAt, faLock } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 export default function ResetPasswordPage() {
   const [newPassword, setNewPassword] = useState("");
@@ -29,15 +30,19 @@ export default function ResetPasswordPage() {
   return (
     <div className="!p-2 max-md:!p-4 ">
       <header className=" max-sm:max-w-2xs max-sm:mx-auto max-sm:text-center  max-sm:hidden">
+       <Link href={'/'}>
         <h1 className="text-2xl font-bold ">
           Bill <span className="text-red-500">Mate</span>
         </h1>
+       </Link>
       </header>
       <div className=" flex justify-center items-center min-h-screen gap-6 max-md:!p-4 max-sm:flex-col">
         <header className="  hidden max-sm:block ">
+         <Link href={'/'}>
           <h1 className="text-2xl font-bold  max-sm:text-3xl">
             Bill <span className="text-red-500">Mate</span>
           </h1>
+         </Link>
         </header>
         <div className="flex justify-center w-full gap-4">
           <div className="relative h-[400px] w-[400px] max-md:w-[300px] max-md:h-[300px] max-sm:hidden">
@@ -64,7 +69,7 @@ export default function ResetPasswordPage() {
                 placeholder="New Password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full p-2 mb-3 border rounded"
+                className="w-full p-2 mb-3 border rounded !pl-10"
                 required
               />
             </div>
@@ -74,13 +79,13 @@ export default function ResetPasswordPage() {
               </span>
 
               <Input
-                className=""
                 type="password"
                 name="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
                 placeholder="Confirm Password"
+                className="!pl-10"
               />
             </div>
             <Button className=" !bg-[#FF0000] !text-white !p-6 rounded !text-xl ">

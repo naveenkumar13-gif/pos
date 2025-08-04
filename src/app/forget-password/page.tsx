@@ -8,6 +8,7 @@ import Button from "@/components/button";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAt } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -20,15 +21,19 @@ export default function ForgotPasswordPage() {
   return (
     <div className="!p-2 max-md:!p-4 ">
       <header className=" max-sm:max-w-2xs max-sm:mx-auto max-sm:text-center  max-sm:hidden">
-        <h1 className="text-2xl font-bold ">
-          Bill <span className="text-red-500">Mate</span>
-        </h1>
+        <Link href={"/"}>
+          <h1 className="text-2xl font-bold ">
+            Bill <span className="text-red-500">Mate</span>
+          </h1>
+        </Link>
       </header>
       <div className="flex min-h-screen items-center justify-center gap-5 max-sm:flex-col">
         <header className="  hidden max-sm:block  ">
-          <h1 className="text-2xl font-bold  max-sm:text-3xl">
-            Bill <span className="text-red-500">Mate</span>
-          </h1>
+          <Link href={"/"}>
+            <h1 className="text-2xl font-bold  max-sm:text-3xl">
+              Bill <span className="text-red-500">Mate</span>
+            </h1>
+          </Link>
         </header>
         <div className="relative h-[400px] w-[400px] mb-6 max-md:w-[300px] max-md:h-[300px] max-sm:hidden">
           <Image
@@ -57,7 +62,7 @@ export default function ForgotPasswordPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className=" w-full"
+              className=" w-full !pl-10"
               placeholder="Email"
             />
           </div>

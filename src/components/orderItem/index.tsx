@@ -1,19 +1,25 @@
+"use client";
 import useCartStore from "@/store/useCart";
 
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 
 function OrderItem() {
   const { cart, updateQuantity } = useCartStore();
+  const { clearCart } = useCartStore();
   return (
     <div className="">
       <div className="flex items-center justify-between !mb-6 ">
         {" "}
         <h2>Order #7465738</h2>
         <span>
-          <FontAwesomeIcon icon={faXmark} />
+          <FontAwesomeIcon
+            icon={faXmark}
+            onClick={() => clearCart()}
+            className="cursor-pointer"
+          />
         </span>
       </div>
       {cart.map((item) => (
