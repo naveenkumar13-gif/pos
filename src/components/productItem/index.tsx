@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import useCartStore from "@/store/useCart";
+import { message } from "antd";
 
 const menuItems = [
   {
@@ -57,8 +58,29 @@ const menuItems = [
   },
 ];
 
+type MenuItem = {
+  id: number;
+  title: string;
+  price: number;
+  desc: string;
+  img: typeof product;
+  rating: number;
+};
+
 function ProductItem() {
   const { addToCart } = useCartStore();
+
+  const handleAddToCart = (item: MenuItem) => {
+    const newItem = {
+      id: item.id,
+      title: item.title,
+      price: item.price,
+      quantity: 1,
+      img: item.img.src,
+    };
+
+    addToCart(newItem);
+  };
   return (
     <div className=" grid grid-cols-3 gap-4">
       {menuItems.map((item, index) => (
@@ -86,15 +108,7 @@ function ProductItem() {
               </div>
               <Button
                 className="!bg-red-500 !text-white  !rounded-full hover:bg-red-600 transition"
-                onClick={() =>
-                  addToCart({
-                    id: item.id,
-                    title: item.title,
-                    price: item.price,
-                    quantity: 1,
-                    img: item.img.src,
-                  })
-                }
+                onClick={() => handleAddToCart(item)}
               >
                 Add to Cart
               </Button>

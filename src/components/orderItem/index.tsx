@@ -28,12 +28,7 @@ function OrderItem() {
           className="flex !items-center justify-between  gap-2 !mb-4 "
         >
           <div>
-            <Image
-              src={item.img || "placeholder.png"}
-              alt={item.title}
-              width={50}
-              height={50}
-            />
+            <Image src={item.img} alt={item.title} width={50} height={50} />
           </div>
           <div className="flex flex-col items-center ">
             <h3 className="text-lg font-semibold">{item.title}</h3>
