@@ -74,7 +74,6 @@
 
 // export default useCartStore;
 
-import { p } from "framer-motion/m";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -88,7 +87,7 @@ interface CartItem {
 type CartState = {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
-  removeFromCart: (id: string) => void;
+  removeFromCart: (id: number) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
   totalItems: () => number;

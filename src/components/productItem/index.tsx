@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import useCartStore from "@/store/useCart";
-import { message } from "antd";
+
 
 const menuItems = [
   {
