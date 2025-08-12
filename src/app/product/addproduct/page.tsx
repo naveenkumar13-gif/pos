@@ -16,6 +16,7 @@ import { Toaster, toast } from "sonner";
 import Aside from "@/components/aside";
 import Image from "next/image";
 
+import { useRouter } from "next/navigation";
 interface ProductFormData {
   name: string;
   category: string;
@@ -44,6 +45,8 @@ const ProductForm = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isImageDialogOpen, setIsImageDialogOpen] = useState(false);
 
+  const route = useRouter();
+
   const handleInputChange = (field: keyof ProductFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
@@ -61,8 +64,6 @@ const ProductForm = () => {
   };
 
   const handleCameraCapture = () => {
-    // This would typically open camera interface
-    // For now, we'll trigger the file input with camera constraint
     const input = document.createElement("input");
     input.type = "file";
     input.accept = "image/*";
@@ -99,17 +100,42 @@ const ProductForm = () => {
     setIsImageDialogOpen(false);
   };
 
-  const handleSaveProduct = () => {
+  const handleSaveProduct = (e: React.FormEvent) => {
+    if (
+      !formData.name ||
+      !formData.category ||
+      !formData.price ||
+      !formData.productId ||
+      !formData.actualPrice ||
+      !formData.quantity ||
+      !formData.status ||
+      !formData.type ||
+      !formData.description
+    ) {
+      toast.error("Please fill the form — No data entered!");
+      return;
+    }
     toast.success("Product Saved — Your product has been successfully saved!");
+    setFormData({
+      name: "",
+      category: "",
+      price: "",
+      productId: "",
+      actualPrice: "",
+      quantity: "",
+      status: "",
+      type: "",
+      description: "",
+    });
   };
 
   const handleBack = () => {
-    // Navigate back logic would go here
+    route.push("/product");
     console.log("Navigate back");
   };
 
   const handleHome = () => {
-    // Navigate to home logic would go here
+    route.push("/");
     console.log("Navigate to home");
   };
 
@@ -118,7 +144,6 @@ const ProductForm = () => {
       <Toaster position="top-right" />
       <Aside />
       <div className="flex-1">
-        {/* Header */}
         <div className="flex items-center gap-4 !mb-6">
           <Button
             variant="destructive"
@@ -131,10 +156,8 @@ const ProductForm = () => {
           <h1 className="text-2xl font-semibold text-foreground">Product</h1>
         </div>
 
-        {/* Main Content */}
         <Card className="!p-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Image Upload Section */}
             <div className="lg:col-span-1">
               <div className="!space-y-4">
                 <div className="relative">
@@ -164,10 +187,8 @@ const ProductForm = () => {
               </div>
             </div>
 
-            {/* Form Section */}
             <div className="lg:col-span-2">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Product Name */}
                 <div className="!space-y-2">
                   <Label htmlFor="product-name">Product Name:</Label>
                   <Input
@@ -178,7 +199,6 @@ const ProductForm = () => {
                   />
                 </div>
 
-                {/* Category */}
                 <div className="!space-y-2">
                   <Label htmlFor="category">Category:</Label>
                   <Input
@@ -191,7 +211,6 @@ const ProductForm = () => {
                   />
                 </div>
 
-                {/* Price */}
                 <div className="!space-y-2">
                   <Label htmlFor="price">Price:</Label>
                   <Input
@@ -202,7 +221,6 @@ const ProductForm = () => {
                   />
                 </div>
 
-                {/* Product ID */}
                 <div className="!space-y-2">
                   <Label htmlFor="product-id">Product ID:</Label>
                   <Input
@@ -215,7 +233,6 @@ const ProductForm = () => {
                   />
                 </div>
 
-                {/* Actual Price */}
                 <div className="!space-y-2">
                   <Label htmlFor="actual-price">Actual Price:</Label>
                   <Input
@@ -228,7 +245,6 @@ const ProductForm = () => {
                   />
                 </div>
 
-                {/* Product Quantity */}
                 <div className="!space-y-2">
                   <Label htmlFor="quantity">Product Quantity:</Label>
                   <Input
@@ -241,7 +257,6 @@ const ProductForm = () => {
                   />
                 </div>
 
-                {/* Status */}
                 <div className="!space-y-2">
                   <Label htmlFor="status">Status:</Label>
                   <Input
@@ -254,7 +269,6 @@ const ProductForm = () => {
                   />
                 </div>
 
-                {/* Type */}
                 <div className="!space-y-2">
                   <Label htmlFor="type">Type:</Label>
                   <Input
@@ -265,7 +279,6 @@ const ProductForm = () => {
                   />
                 </div>
 
-                {/* Description */}
                 <div className="md:col-span-2 !space-y-2">
                   <Label htmlFor="description">Description:</Label>
                   <Textarea
@@ -280,7 +293,6 @@ const ProductForm = () => {
                 </div>
               </div>
 
-              {/* Save Button */}
               <div className="!mt-8 flex justify-center">
                 <Button
                   onClick={handleSaveProduct}
@@ -294,7 +306,6 @@ const ProductForm = () => {
           </div>
         </Card>
 
-        {/* Home Button */}
         <div className="fixed bottom-6 left-6">
           <Button
             variant="destructive"

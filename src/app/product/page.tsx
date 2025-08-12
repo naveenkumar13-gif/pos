@@ -3,6 +3,7 @@ import Aside from "@/components/aside";
 import { Empty, Tag, Typography } from "antd";
 import Image from "next/image";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Product = {
   id: number;
@@ -16,6 +17,7 @@ type Product = {
 };
 
 export default function ProductPage() {
+  const route = useRouter();
   const [products, setProducts] = useState<Product[]>([
     {
       id: 1,
@@ -42,16 +44,17 @@ export default function ProductPage() {
   };
 
   const handleAdd = () => {
-    const newProduct: Product = {
-      id: Date.now(),
-      name: "New Product",
-      status: "In stock",
-      productId: Math.floor(Math.random() * 100000),
-      quantity: 10,
-      price: 99,
-      image: "",
-    };
-    setProducts([...products, newProduct]);
+    // const newProduct: Product = {
+    //   id: Date.now(),
+    //   name: "New Product",
+    //   status: "In stock",
+    //   productId: Math.floor(Math.random() * 100000),
+    //   quantity: 10,
+    //   price: 99,
+    //   image: "",
+    // };
+    // setProducts([...products, newProduct]);
+    route.push("/product/addproduct");
   };
 
   const handleEditToggle = (id: number) => {
