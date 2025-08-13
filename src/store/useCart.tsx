@@ -1,79 +1,122 @@
-
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-interface CartItem {
+export interface MenuItem {
   id: number;
-  title: string;
+  name: string;
   price: number;
-  quantity: number;
-  img: string;
+  description: string;
+  image: string;
+  rating: number;
+  category: string;
 }
-type CartState = {
+
+export interface CartItem extends MenuItem {
+  quantity: number;
+}
+
+export interface CustomerInfo {
+  name: string;
+  gender: string;
+  city: string;
+  phone: string;
+  email: string;
+  dateOfBirth: string;
+}
+
+interface CartState {
   cart: CartItem[];
-  addToCart: (item: CartItem) => void;
+  customerInfo: CustomerInfo;
+  currentOrder: string | null;
+
+  addToCart: (item: MenuItem) => void;
   removeFromCart: (id: number) => void;
-  updateQuantity: (id: string, quantity: number) => void;
+  updateQuantity: (id: number, quantity: number) => void;
   clearCart: () => void;
-  totalItems: () => number;
-  totalPrice: () => number;
-};
+
+  setCustomerInfo: (info: CustomerInfo) => void;
+  setCurrentOrder: (orderId: string) => void;
+
+  getTotalItems: () => number;
+  getTotalPrice: () => number;
+}
 
 const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
       cart: [],
+      customerInfo: {
+        name: "",
+        gender: "",
+        city: "",
+        phone: "",
+        email: "",
+        dateOfBirth: "",
+      },
+      currentOrder: null,
+
       addToCart: (item) => {
         const { cart } = get();
-        const existItem = cart.find((cartItem) => cartItem.id === item.id);
-        if (existItem) {
+        const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+        if (existingItem) {
           set({
             cart: cart.map((cartItem) =>
               cartItem.id === item.id
-                ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
+                ? { ...cartItem, quantity: cartItem.quantity + 1 }
                 : cartItem
             ),
           });
         } else {
           set({
-            cart: [...cart, { ...item, quantity: item.quantity }],
+            cart: [...cart, { ...item, quantity: 1 }],
           });
         }
       },
+
       removeFromCart: (id) => {
-        const { cart } = get();
         set({
-          cart: cart.filter((item) => item.id !== Number(id)),
+          cart: get().cart.filter((item) => item.id !== id),
         });
       },
+
       updateQuantity: (id, quantity) => {
-        const { cart } = get();
-        set({
-          cart: cart.map((item) =>
-            item.id === Number(id) ? { ...item, quantity } : item
-          ),
-        });
         if (quantity <= 0) {
           set({
-            cart: cart.filter((item) => item.id !== Number(id)),
+            cart: get().cart.filter((item) => item.id !== id),
+          });
+        } else {
+          set({
+            cart: get().cart.map((item) =>
+              item.id === id ? { ...item, quantity } : item
+            ),
           });
         }
       },
+
       clearCart: () => {
         set({ cart: [] });
       },
-      totalItems: () => {
-        const { cart } = get();
-        return cart.reduce((acc, item) => acc + item.quantity, 0);
+
+      setCustomerInfo: (info) => {
+        set({ customerInfo: info });
       },
-      totalPrice: () => {
-        const { cart } = get();
-        return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+      setCurrentOrder: (orderId) => {
+        set({ currentOrder: orderId });
+      },
+
+      getTotalItems: () => {
+        return get().cart.reduce((acc, item) => acc + item.quantity, 0);
+      },
+
+      getTotalPrice: () => {
+        return get().cart.reduce(
+          (acc, item) => acc + item.price * item.quantity,
+          0
+        );
       },
     }),
-    {
-      name: "cart-storage",
-    }
+    { name: "cart-storage" }
   )
 );
 

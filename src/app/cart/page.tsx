@@ -1,28 +1,35 @@
-import { ShoppingCart, Menu, Search, Minus, Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card } from "@/components/ui/card";
-import { product } from "../../../public/images";
-import Image from "next/image";
+"use client";
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import useCartStore from "@/store/useCart";
 
-const Cart = () => {
+import Button from "@/components/button/index";
+import { useRouter } from "next/navigation";
+import OrderItem from "@/components/orderItem";
+import { Menu, Search, ShoppingCart } from "lucide-react";
+import { Input } from "@/components/ui/input";
+
+function CartAside() {
+  const { cart, getTotalPrice } = useCartStore();
+  const route = useRouter();
   return (
-    <div className="min-h-screen bg-background max-w-md mx-auto">
-      <header className="flex items-center justify-between !p-4 !pt-12">
+    <div className=" h-full !p-4 border-l border-stone-300   max-sm:w-full  ">
+      <header className="flex items-center justify-between !p-4 !pt-12 bg-red-50 max-sm:!p-2">
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" className="text-foreground">
+          <Button className="text-foreground">
             <Menu className="h-5 w-5" />
           </Button>
           <h1 className="text-xl font-bold">
             Bill <span className="text-primary">Mate</span>
           </h1>
         </div>
-        <Button variant="ghost" size="icon" className="text-foreground">
+         <Button className="text-foreground">
           <ShoppingCart className="h-5 w-5" />
         </Button>
       </header>
 
-      <div className="!px-4 !mb-6">
+      <div className="!px-4 !my-6">
         <div className="relative">
           <Input
             placeholder="Search..."
@@ -31,74 +38,55 @@ const Cart = () => {
           <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         </div>
       </div>
-
-      <div className="!px-4 !mb-4">
-        <h2 className="text-lg font-semibold text-foreground">Order #2456</h2>
-      </div>
-      <div className="!px-4 1mb-6">
-        <Card className="!p-4 border border-border rounded-lg">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Image
-                src={product}
-                alt="Burger"
-                className="w-16 h-16 rounded-lg object-cover"
-              />
-              <div>
-                <h3 className="font-medium text-foreground">Burger</h3>
-                <p className="text-primary font-semibold">₹199</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <Button
-                variant="outline"
-                size="icon"
-                className="h-8 w-8 rounded-md border-border"
-              >
-                <Minus className="h-4 w-4" />
-              </Button>
-              <span className="font-medium text-foreground w-8 text-center">
-                1
+      <div className="h-full">
+        {cart.length === 0 ? (
+          <div className=" h-full   !mb-6">
+            <div className="flex flex-col items-center justify-center h-full">
+              <span>
+                <FontAwesomeIcon icon={faPlus} />
               </span>
-              <Button
-                size="icon"
-                className="h-8 w-8 rounded-md bg-primary hover:bg-primary/90"
-              >
-                <Plus className="h-4 w-4 text-primary-foreground" />
-              </Button>
+              <h2 className="text-2xl font-bold mb-4 text-gray-400">
+                Add Product{" "}
+              </h2>
+              <p className="!text-gray-400">From Special Menu</p>
             </div>
           </div>
-        </Card>
-      </div>
-
-      {/* Order Summary */}
-      <div className="!px-4 !my-8">
-        <Card className="!p-4 border border-border rounded-lg">
-          <h3 className="font-semibold text-foreground !mb-4">Order Summary</h3>
-
-          <div className="!space-y-3">
-            <div className="flex justify-between items-center">
-              <span className="text-foreground">Subtotal</span>
-              <span className="text-primary font-semibold">₹199</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-foreground">Tax</span>
-              <span className="text-primary font-semibold">₹16</span>
-            </div>
-            <hr className="border-border" />
-            <div className="flex justify-between items-center font-semibold">
-              <span className="text-foreground">Total</span>
-              <span className="text-primary">₹215</span>
-            </div>
+        ) : (
+          <div className="flex flex-col justify-between gap-4 h-full  ">
+            <OrderItem />
+            {cart && (
+              <div className=" flex flex-col gap-4 border border-gray-400 !p-2 rounded-md">
+                <div className="flex justify-between">
+                  <h2 className="text-xl sm:text-2xl font-bold ">Subtotal:</h2>
+                  <h2 className="text-xl sm:text-2xl font-bold text-[#ff0000]">
+                    ₹{getTotalPrice()}
+                  </h2>
+                </div>
+                <div className="flex justify-between">
+                  <h2 className="text-xl sm:text-2xl font-bold">Tax:</h2>
+                  <h2 className="text-xl sm:text-2xl font-bold text-[#ff0000]">
+                    ₹ 16
+                  </h2>
+                </div>
+                <div className="flex justify-between border-t !pt-4 border-t-gray-400">
+                  <h2 className="text-xl sm:text-2xl font-bold">Total:</h2>
+                  <h2 className="text-xl sm:text-2xl font-bold text-[#ff0000] max-sm:text-base">
+                    ₹{getTotalPrice() + 16}
+                  </h2>
+                </div>
+                <Button
+                  className="!bg-red-500 !text-white !font-bold !text-base sm:!text-lg !py-6 !focus:outline-none !focus:border-none !border-none"
+                  onClick={() => route.push("/checkout")}
+                >
+                  place the Order
+                </Button>
+              </div>
+            )}
           </div>
-
-          <Button className="w-full mt-6 bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-3 rounded-lg">
-            Place the Order
-          </Button>
-        </Card>
+        )}
       </div>
     </div>
   );
-};
+}
 
-export default Cart;
+export default CartAside;
