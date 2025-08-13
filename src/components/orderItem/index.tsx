@@ -12,7 +12,6 @@ function OrderItem() {
   return (
     <div className="">
       <div className="flex items-center justify-between !mb-6 ">
-        {" "}
         <h2>Order #7465738</h2>
         <span>
           <FontAwesomeIcon

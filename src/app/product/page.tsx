@@ -65,7 +65,7 @@ export default function ProductPage() {
 
   return (
     <div className="   ">
-      <div className="flex ">
+      <div className="flex  ">
         {" "}
         <Aside />
         <div className="flex-1 !p-6 h-auto ">

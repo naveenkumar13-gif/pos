@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import useCartStore from "@/store/useCart";
 
-
 const menuItems = [
   {
     id: 1,
@@ -82,7 +81,7 @@ function ProductItem() {
     addToCart(newItem);
   };
   return (
-    <div className=" grid grid-cols-3 gap-4">
+    <div className=" grid grid-cols-3 gap-4 max-sm:grid-cols-1">
       {menuItems.map((item, index) => (
         <div
           key={index}
@@ -98,7 +97,7 @@ function ProductItem() {
                 ₹{item.price}
               </span>
             </div>
-            <p className="text-gray-600 text-xs">{item.desc}</p>
+            <p className="text-gray-600 text-xs max-sm:text-sm">{item.desc}</p>
             <div className="flex justify-between mt-2">
               <div className="flex items-center justify-center gap-1 ">
                 <span className="text-yellow-500">{item.rating}</span>
