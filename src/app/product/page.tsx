@@ -1,215 +1,388 @@
 "use client";
-import Aside from "@/components/aside";
-import { Empty, Tag, Typography } from "antd";
-import Image from "next/image";
-import React, { useState } from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Edit, Trash2, Plus, Home, Check, X } from "lucide-react";
+import { useToast } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
-type Product = {
-  id: number;
+interface Product {
+  id: string;
   name: string;
-  status: string;
-  productId: number;
+  status: "In stock" | "Out of stock" | "Low stock";
+  productId: string;
   quantity: number;
   price: number;
-  image: string;
-  isEditing?: boolean;
-};
+  icon?: string;
+}
 
-export default function ProductPage() {
-  const route = useRouter();
+const ProductTable = () => {
+  const { toast } = useToast();
+  const router = useRouter();
   const [products, setProducts] = useState<Product[]>([
     {
-      id: 1,
-      name: "Product 1",
+      id: "1",
+      name: "Biriyani",
       status: "In stock",
-      productId: 12345,
-      quantity: 10,
-      price: 99,
-      image: "",
+      productId: "321654",
+      quantity: 25,
+      price: 199,
+      icon: "🍛",
     },
     {
-      id: 2,
-      name: "Product 3",
-      status: "Out of stock",
-      productId: 12346,
-      quantity: 10,
-      price: 99,
-      image: "",
+      id: "2",
+      name: "Chicken Curry",
+      status: "In stock",
+      productId: "321655",
+      quantity: 15,
+      price: 249,
+      icon: "🍗",
+    },
+    {
+      id: "3",
+      name: "Naan Bread",
+      status: "Low stock",
+      productId: "321656",
+      quantity: 3,
+      price: 49,
+      icon: "🥖",
     },
   ]);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
 
-  const handleDelete = (id: number) => {
-    setProducts(products.filter((product) => product.id !== id));
+  const handleEdit = (productId: string) => {
+    const product = products.find((p) => p.id === productId);
+    if (product) {
+      setEditingId(productId);
+      setEditingProduct({ ...product });
+    }
   };
 
-  const handleAdd = () => {
-    // const newProduct: Product = {
-    //   id: Date.now(),
-    //   name: "New Product",
-    //   status: "In stock",
-    //   productId: Math.floor(Math.random() * 100000),
-    //   quantity: 10,
-    //   price: 99,
-    //   image: "",
-    // };
-    // setProducts([...products, newProduct]);
-    route.push("/product/addproduct");
+  const handleSave = () => {
+    if (editingProduct && editingId) {
+      setProducts(
+        products.map((p) => (p.id === editingId ? editingProduct : p))
+      );
+      setEditingId(null);
+      setEditingProduct(null);
+      toast.success("Product Saved", {
+        description: "Your product has been successfully saved!",
+      });
+    }
   };
 
-  const handleEditToggle = (id: number) => {
-    setProducts(
-      products.map((p) => (p.id === id ? { ...p, isEditing: !p.isEditing } : p))
-    );
+  const handleCancel = () => {
+    setEditingId(null);
+    setEditingProduct(null);
+  };
+
+  const handleDelete = (productId: string) => {
+    setProducts(products.filter((product) => product.id !== productId));
+    toast.success("Product Deleted", {
+      description: "Product has been successfully deleted",
+    });
+  };
+
+  const handleAddProduct = () => {
+    toast.info("Add Product", {
+      description: "Add product functionality would be implemented here",
+    });
+  };
+
+  const getStatusVariant = (status: Product["status"]) => {
+    switch (status) {
+      case "In stock":
+        return "default";
+      case "Low stock":
+        return "secondary";
+      case "Out of stock":
+        return "destructive";
+      default:
+        return "default";
+    }
   };
 
   return (
-    <div className="   ">
-      <div className="flex  ">
-        {" "}
-        <Aside />
-        <div className="flex-1 !p-6 h-auto ">
-          <div className="flex justify-between items-center !mb-4">
-            <h1 className="text-5xl font-bold">Product</h1>
-            <button
-              onClick={handleAdd}
-              className="bg-red-500 text-white !px-4 !py-2 rounded-lg hover:bg-red-600"
-            >
-              + Add Product
-            </button>
-          </div>
-          {products.length > 0 ? (
-            <div className="overflow-x-auto ">
-              <table className="min-w-full border rounded-lg text-center ">
-                <thead>
-                  <tr className="border-b">
-                    <th className="!p-3 border-r border-gray-300">Product</th>
-                    <th className="!p-3 border-r border-gray-300">Status</th>
-                    <th className="!p-3 border-r border-gray-300">
-                      Product ID
-                    </th>
-                    <th className="!p-3 border-r border-gray-300">Quantity</th>
-                    <th className="!p-3 border-r border-gray-300">Price</th>
-                    <th className="!p-3">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {products.map((product) => (
-                    <tr key={product.id} className="border-b">
-                      <td className="!p-5 flex items-center gap-2 border-r border-gray-300">
-                        <Image
-                          src={product.image || "/placeholder.png"}
-                          alt={product.name}
-                          width={40}
-                          height={40}
-                          className="w-8 h-8 rounded-full"
-                        />
-                        {product.isEditing ? (
-                          <>
-                            <input
-                              type="text"
-                              value={product.name}
-                              onChange={(e) =>
-                                setProducts(
-                                  products.map((p) =>
-                                    p.id === product.id
-                                      ? { ...p, name: e.target.value }
-                                      : p
-                                  )
-                                )
-                              }
-                              onBlur={() => handleEditToggle(product.id)}
-                              className="bg-white border border-gray-300 rounded-lg !p-2"
-                            />
-                          </>
+    <div className="min-h-screen bg-background !p-4 !md:p-6">
+      <div className=" ">
+      
+        <div
+          className="!mb-6  flex items-center justify-between "
+          onClick={() => router.push("/product/addproduct")}
+        >
+          <h1 className="text-2xl font-bold text-foreground md:text-3xl">
+            Product
+          </h1>
+          <Button onClick={handleAddProduct} className="w-fit !p-2">
+            <Plus className="mr-2 h-4 w-4" />
+            Add Product
+          </Button>
+        </div>
+        <Card className="hidden md:block  !p-1">
+          <CardContent className=" !m-2 ">
+            <Table>
+              <TableHeader>
+                <TableRow className="">
+                  <TableHead className="w-[200px]">Product</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Product ID</TableHead>
+                  <TableHead>Quantity</TableHead>
+                  <TableHead>Price</TableHead>
+                  <TableHead className="text-right">Action</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {products.map((product) => {
+                  const isEditing = editingId === product.id;
+                  const currentProduct = isEditing ? editingProduct : product;
+
+                  return (
+                    <TableRow key={product.id}>
+                      <TableCell className="flex items-center gap-3 !p-2 !my-1">
+                        <div className="text-2xl">{product.icon}</div>
+                        {isEditing ? (
+                          <Input
+                            value={currentProduct?.name || ""}
+                            onChange={(e) =>
+                              setEditingProduct((prev) =>
+                                prev ? { ...prev, name: e.target.value } : null
+                              )
+                            }
+                            className="font-medium"
+                          />
                         ) : (
-                          <span
-                            className="font-semibold cursor-pointer"
-                            onClick={() => handleEditToggle(product.id)}
+                          <span className="font-medium ">{product.name}</span>
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        {isEditing ? (
+                          <Select
+                            value={currentProduct?.status}
+                            onValueChange={(value: Product["status"]) =>
+                              setEditingProduct((prev) =>
+                                prev ? { ...prev, status: value } : null
+                              )
+                            }
                           >
-                            {product.name}
-                          </span>
-                        )}
-                      </td>
-
-                      <td className="!p-3 border-r border-gray-300">
-                        {product.status === "In stock" ? (
-                          <Tag color="green">In stock</Tag>
+                            <SelectTrigger className="w-[430px]">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="In stock">In stock</SelectItem>
+                              <SelectItem value="Low stock">
+                                Low stock
+                              </SelectItem>
+                              <SelectItem value="Out of stock">
+                                Out of stock
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
                         ) : (
-                          <Tag color="red">Out of stock</Tag>
+                          <Badge
+                            variant={getStatusVariant(product.status)}
+                            className={
+                              product.status === "In stock"
+                                ? "bg-green-400 text-white !p-1 hover:bg-green-600"
+                                : " !p-1"
+                            }
+                          >
+                            {product.status}
+                          </Badge>
                         )}
-                      </td>
-
-                      <td className="!p-3 border-r border-gray-300 font-semibold">
-                        {product.status === "In stock" ? (
-                          <p>{product.productId}</p>
+                      </TableCell>
+                      <TableCell className="font-mono text-sm">
+                        {product.productId}
+                      </TableCell>
+                      <TableCell>
+                        {isEditing ? (
+                          <Input
+                            type="number"
+                            value={currentProduct?.quantity || 0}
+                            onChange={(e) =>
+                              setEditingProduct((prev) =>
+                                prev
+                                  ? {
+                                      ...prev,
+                                      quantity: parseInt(e.target.value) || 0,
+                                    }
+                                  : null
+                              )
+                            }
+                            className="w-20"
+                          />
                         ) : (
-                          <p className="text-red-400 line-through">
-                            Out of stock
-                          </p>
+                          product.quantity
                         )}
-                      </td>
-
-                      <td className="!p-3 border-r border-gray-300">
-                        {product.status === "In stock" ? (
-                          <p>{product.quantity}</p>
+                      </TableCell>
+                      <TableCell>
+                        {isEditing ? (
+                          <Input
+                            type="number"
+                            value={currentProduct?.price || 0}
+                            onChange={(e) =>
+                              setEditingProduct((prev) =>
+                                prev
+                                  ? {
+                                      ...prev,
+                                      price: parseInt(e.target.value) || 0,
+                                    }
+                                  : null
+                              )
+                            }
+                            className="w-20"
+                          />
                         ) : (
-                          <p className="text-red-400 line-through">
-                            Out of stock
-                          </p>
+                          product.price
                         )}
-                      </td>
-
-                      <td className="!p-3 border-r border-gray-300">
-                        {product.status === "In stock" ? (
-                          <p>{product.price}</p>
-                        ) : (
-                          <p className="text-red-400 line-through">
-                            Out of stock
-                          </p>
-                        )}
-                      </td>
-
-                      <td className="!p-3 border-gray-300 flex gap-4 items-center justify-center">
-                        {product.status === "In stock" && (
-                          <>
-                            <button
-                              onClick={() => handleEditToggle(product.id)}
-                              className="text-green-500 hover:underline flex items-center gap-1"
-                              disabled={product.status !== "In stock"}
-                            >
-                              ✏️ Edit
-                            </button>
-                            <button
-                              onClick={() => handleDelete(product.id)}
-                              className="text-red-500 hover:underline flex items-center gap-1"
-                              disabled={product.status !== "In stock"}
-                            >
-                              🗑 Delete
-                            </button>
-                          </>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <div className="flex justify-center items-center h-[60vh]">
-              <Empty
-                description={
-                  <Typography.Text
-                    style={{ fontSize: 16, fontWeight: 500, color: "#ff4d4f" }}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <div className="flex justify-end gap-2">
+                          {isEditing ? (
+                            <>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={handleSave}
+                                className="text-white hover:text-green-500 hover:bg-green-500 !p-1"
+                              >
+                                <Check className="!mr-1 h-3 w-3" />
+                                Save
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={handleCancel}
+                                className="text-muted-foreground hover:text-muted-foreground hover:bg-muted/10"
+                              >
+                                <X className="!mr-1 h-3 w-3" />
+                                Cancel
+                              </Button>
+                            </>
+                          ) : (
+                            <>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => handleEdit(product.id)}
+                                className=" text-green-400 hover:text-green-700 hover:bg-green-400/10 !p-2 !mx-2"
+                              >
+                                <Edit className="!mr-1 h-3 w-3" />
+                                Edit
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => handleDelete(product.id)}
+                                className="text-destructive hover:text-destructive hover:bg-destructive/10 !p-2"
+                              >
+                                <Trash2 className="!mr-1 h-3 w-3" />
+                                Delete
+                              </Button>
+                            </>
+                          )}
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+        <div className="!space-y-4 md:hidden ">
+          {products.map((product) => (
+            <Card key={product.id} className="!p-3">
+              <CardHeader className="!pb-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="text-2xl">{product.icon}</div>
+                    <div>
+                      <CardTitle className="text-lg">{product.name}</CardTitle>
+                      <p className="text-sm text-muted-foreground font-mono">
+                        ID: {product.productId}
+                      </p>
+                    </div>
+                  </div>
+                  <Badge
+                    variant={getStatusVariant(product.status)}
+                    className={
+                      product.status === "In stock"
+                        ? "bg-green-400 text-white !p-1"
+                        : " !p-1"
+                    }
                   >
-                    No product found. Please add a new product.
-                  </Typography.Text>
-                }
-              />
-            </div>
-          )}
+                    {product.status}
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardContent className="!pt-1">
+                <div className="flex items-center justify-between">
+                  <div className="flex gap-6">
+                    <div>
+                      <p className="text-sm text-muted-foreground">Quantity</p>
+                      <p className="font-medium">{product.quantity}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">Price</p>
+                      <p className="font-medium">{product.price}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleEdit(product.id)}
+                      className="text-success text-green-400 hover:text-green-700 !mx-2"
+                    >
+                      <Edit className="!mr-1 h-3 w-3" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleDelete(product.id)}
+                      className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                    >
+                      <Trash2 className="!mr-1 h-3 w-3" />
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+    
+        <div className="fixed bottom-6 left-6">
+          <Button
+            variant="secondary"
+            size="icon"
+            className="h-12 w-12 rounded-full shadow-lg"
+            onClick={() => window.location.reload()}
+          >
+            <Home className="h-5 w-5" />
+          </Button>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default ProductTable;

@@ -26,9 +26,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Toaster />
-
       <body className={`${roboto.variable} ${inter.variable} antialiased`}>
+        <Toaster richColors position="top-right" />
         {children}
       </body>
     </html>
