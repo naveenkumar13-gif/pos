@@ -18,10 +18,14 @@ import useCartStore, { CustomerInfo } from "@/store/useCart";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Header from "@/components/header";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { ShoppingCart } from "lucide-react";
 
 export default function Checkout() {
   const route = useRouter();
-  const { cart, getTotalPrice, setCustomerInfo } = useCartStore();
+  const { cart, getTotalPrice, setCustomerInfo, removeFromCart } =
+    useCartStore();
   const [orderId] = useState(`#${Math.floor(Math.random() * 9999)}`);
   const {
     register,
@@ -42,10 +46,26 @@ export default function Checkout() {
   if (cart.length === 0) {
     return (
       <Layout>
-        <div className="max-w-4xl mx-auto !px-4 !py-8">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold !mb-4">No items in cart</h2>
-            <Button onClick={() => route.push("/")}>Browse Menu</Button>
+        <div className="max-w-4xl !mx-auto min-h-screen !px-4 !py-8 flex items-center justify-center">
+          <div className="text-center rounded-2xl !p-8 border border-gray-100 max-w-md w-full">
+            <div className="flex justify-center !mb-6">
+              <div className="bg-indigo-100 !p-6 rounded-full">
+                <ShoppingCart className="w-16 h-16 text-red-500" />
+              </div>
+            </div>
+            <h2 className="text-3xl font-extrabold text-gray-800 !mb-2">
+              Your Cart is Empty
+            </h2>
+            <p className="text-gray-500 !mb-6">
+              Looks like you haven’t added anything yet. Let’s find something
+              delicious!
+            </p>
+            <Button
+              onClick={() => route.push("/")}
+              className="!px-6 !py-2 rounded-lg bg-gradient-to-r from-red-500 to-red-600 text-white font-medium shadow-md hover:shadow-lg hover:from-red-600 hover:to-red-700 transition-all duration-300"
+            >
+              Browse Menu
+            </Button>
           </div>
         </div>
       </Layout>
@@ -194,6 +214,11 @@ export default function Checkout() {
                     <div className="text-right">
                       <p className="font-semibold">Quantity: {item.quantity}</p>
                     </div>
+                    <FontAwesomeIcon
+                      icon={faXmark}
+                      onClick={() => removeFromCart(item.id)}
+                      className="cursor-pointer"
+                    />
                   </div>
                 ))}
               </CardContent>

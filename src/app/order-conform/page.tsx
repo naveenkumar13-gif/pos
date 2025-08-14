@@ -54,7 +54,7 @@ export default function OrderConfirmation() {
   return (
     <Layout>
       <div className=" !px-4 !py-8">
-        {/* Success Message */}
+        
         <div className="text-center flex flex-col justify-center items-center !mb-8">
           <CheckCircle className="w-20 h-20 text-green-500 mx-auto !mb-4" />
           <h1 className="text-3xl font-bold text-green-600 !mb-2">
@@ -65,7 +65,7 @@ export default function OrderConfirmation() {
           </p>
         </div>
 
-        {/* Order Summary */}
+      
         <Card className="!mb-6 !p-4 max-sm:!p-3">
           <CardHeader>
             <CardTitle>Order Summary</CardTitle>
@@ -92,7 +92,7 @@ export default function OrderConfirmation() {
           </CardContent>
         </Card>
 
-        {/* Action Buttons */}
+       
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button
             onClick={() => setShowInvoice(true)}
@@ -109,7 +109,6 @@ export default function OrderConfirmation() {
         </div>
       </div>
 
-      {/* Invoice Modal */}
       <Dialog open={showInvoice} onOpenChange={setShowInvoice}>
         <DialogContent className=" !p-4">
           <DialogHeader>

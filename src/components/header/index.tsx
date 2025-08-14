@@ -22,17 +22,6 @@ function Header() {
               Bill <span className="text-red-500">Mate</span>
             </h1>
           </div>
-          <div
-            className="hidden max-sm:block  relative"
-            onClick={() => route.push("/cart")}
-          >
-            <span className="  border border-gray-200 rounded-md !p-2">
-              <FontAwesomeIcon icon={faCartShopping} />
-            </span>
-            {cart.length > 0 && (
-              <p className="absolute  bottom-5 right-1 bg-red-500 text-white rounded-full w-2 h-2 "></p>
-            )}
-          </div>
         </div>
         <div className="relative max-sm:hidden ">
           <span className="absolute left-88 -top-1 text-gray-500   !p-2">
@@ -46,6 +35,14 @@ function Header() {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="!w-96 !p-2 border border-gray-200 rounded-lg  focus:border-red-500  max-sm:hidden"
           />
+        </div>
+        <div className="  relative" onClick={() => route.push("/cart")}>
+          <span className="  border border-gray-200 rounded-md !p-2">
+            <FontAwesomeIcon icon={faCartShopping} />
+          </span>
+          {cart.length > 0 && (
+            <p className="absolute  bottom-5 right-1 bg-red-500 text-white rounded-full w-2 h-2 "></p>
+          )}
         </div>
       </div>
       <div className="!px-4 !mb-6  hidden max-sm:block">

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import useCartStore from "@/store/useCart";
 
-const menuItems = [
+export const menuItems = [
   {
     id: 1,
     name: "Burger",
@@ -82,7 +82,7 @@ type MenuItem = {
 function ProductItem() {
   const { addToCart } = useCartStore();
 
-  const handleAddToCart = (item: any) => {
+  const handleAddToCart = (item: MenuItem) => {
     const newItem: MenuItem = {
       id: item.id,
       name: item.name,
@@ -124,7 +124,7 @@ function ProductItem() {
               </div>
               <Button
                 className="!bg-red-500 !text-white  !rounded-full hover:bg-red-600 transition"
-                onClick={() => handleAddToCart(item)}
+                onClick={() => handleAddToCart}
               >
                 Add to Cart
               </Button>

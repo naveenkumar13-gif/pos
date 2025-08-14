@@ -24,10 +24,10 @@ function OrderItem() {
       {cart.map((item) => (
         <div
           key={item.id}
-          className="flex !items-center justify-between  gap-2 !mb-4 bg-gray-50 !p-2 rounded-md "
+          className="flex !items-center justify-between  gap-2 !mb-4  !p-2 rounded-md "
         >
           <div>
-            <Image src={item.image} alt={item.name} width={50} height={50} />
+            <Image src={item.image} alt={item.name} width={100} height={100} />
           </div>
           <div className="flex flex-col items-center ">
             <h3 className="text-lg font-semibold tex-red-300">{item.name}</h3>

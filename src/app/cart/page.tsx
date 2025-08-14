@@ -15,16 +15,16 @@ function CartAside() {
   const route = useRouter();
   return (
     <div className=" h-full !p-4 border-l border-stone-300   max-sm:w-full  ">
-      <header className="flex items-center justify-between !p-4 !pt-12 bg-red-50 max-sm:!p-2">
+      <header className="flex items-center justify-between !p-4 !pt-12  max-sm:!p-2">
         <div className="flex items-center gap-3">
-          <Button className="text-foreground">
-            <Menu className="h-5 w-5" />
+          <Button className="text-foreground !shadow-none !p-0">
+            <Menu className="h-6 w-6" />
           </Button>
           <h1 className="text-xl font-bold">
             Bill <span className="text-primary">Mate</span>
           </h1>
         </div>
-         <Button className="text-foreground">
+        <Button className="text-foreground">
           <ShoppingCart className="h-5 w-5" />
         </Button>
       </header>
@@ -40,15 +40,26 @@ function CartAside() {
       </div>
       <div className="h-full">
         {cart.length === 0 ? (
-          <div className=" h-full   !mb-6">
-            <div className="flex flex-col items-center justify-center h-full">
-              <span>
-                <FontAwesomeIcon icon={faPlus} />
-              </span>
-              <h2 className="text-2xl font-bold mb-4 text-gray-400">
-                Add Product{" "}
+          <div className="max-w-4xl !mx-auto  !px-4 !py-8 flex items-center justify-center">
+            <div className="text-center rounded-2xl !p-8 border border-gray-100 max-w-md w-full">
+              <div className="flex justify-center !mb-6">
+                <div className="bg-indigo-100 !p-6 rounded-full">
+                  <ShoppingCart className="w-16 h-16 text-red-500" />
+                </div>
+              </div>
+              <h2 className="text-3xl font-extrabold text-gray-800 !mb-2">
+                Your Cart is Empty
               </h2>
-              <p className="!text-gray-400">From Special Menu</p>
+              <p className="text-gray-500 !mb-6 max-sm:text-sm">
+                Looks like you haven’t added anything yet. Let’s find something
+                delicious!
+              </p>
+              <Button
+                onClick={() => route.push("/")}
+                className="!px-6 !py-2 rounded-lg !bg-gradient-to-r from-red-500 to-red-600 !text-white font-medium shadow-md hover:shadow-lg hover:from-red-600 hover:to-red-700 transition-all duration-300"
+              >
+                Browse Menu
+              </Button>
             </div>
           </div>
         ) : (
