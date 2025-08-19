@@ -123,7 +123,6 @@ const ProductTable = () => {
   return (
     <div className="min-h-screen bg-background !p-4 !md:p-6">
       <div className=" ">
-      
         <div
           className="!mb-6  flex items-center justify-between "
           onClick={() => router.push("/product/addproduct")}
@@ -282,7 +281,7 @@ const ProductTable = () => {
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => handleEdit(product.id)}
-                                className=" text-green-400 hover:text-green-700 hover:bg-green-400/10 !p-2 !mx-2"
+                                className="text-emerald-600 hover:text-emerald-700 hover:bg-emerald-600/10 !p-2 !mx-2"
                               >
                                 <Edit className="!mr-1 h-3 w-3" />
                                 Edit
@@ -350,7 +349,7 @@ const ProductTable = () => {
                       variant="ghost"
                       size="sm"
                       onClick={() => handleEdit(product.id)}
-                      className="text-success text-green-400 hover:text-green-700 !mx-2"
+                      className="text-emerald-600 hover:text-emerald-700 hover:bg-emerald-600/10 !mx-2"
                     >
                       <Edit className="!mr-1 h-3 w-3" />
                     </Button>
@@ -369,7 +368,6 @@ const ProductTable = () => {
           ))}
         </div>
 
-    
         <div className="fixed bottom-6 left-6">
           <Button
             variant="secondary"

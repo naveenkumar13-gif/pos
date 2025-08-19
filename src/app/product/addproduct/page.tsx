@@ -101,6 +101,7 @@ const ProductForm = () => {
   };
 
   const handleSaveProduct = (e: React.FormEvent) => {
+    e.preventDefault();
     if (
       !formData.name ||
       !formData.category ||
@@ -319,11 +320,11 @@ const ProductForm = () => {
 
         {/* Image Upload Dialog */}
         <Dialog open={isImageDialogOpen} onOpenChange={setIsImageDialogOpen}>
-          <DialogContent className="sm:max-w-md">
+          <DialogContent className="sm:max-w-md !p-2">
             <DialogHeader>
               <DialogTitle className="text-center">Upload Image</DialogTitle>
             </DialogHeader>
-            <div className="grid grid-cols-2 gap-4 py-4">
+            <div className="grid grid-cols-2 gap-4 !py-4">
               <Button
                 onClick={handleCameraCapture}
                 variant="outline"
@@ -337,7 +338,7 @@ const ProductForm = () => {
                 variant="outline"
                 className="h-32 flex-col gap-3"
               >
-                <Image className="h-8 w-8 text-muted-foreground" />
+                <ImagePlus className="h-8 w-8 text-muted-foreground" />
                 <span>Select Image</span>
               </Button>
             </div>

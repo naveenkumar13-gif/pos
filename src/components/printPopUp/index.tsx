@@ -15,10 +15,10 @@ export default function PrintPopUp({ setIsOpen }: PrintPopUpProps) {
   return (
     <div>
       <div
-        className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50"
+        className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50 "
         onClick={() => setIsOpen(false)}
       ></div>
-      <div className="fixed  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white !p-6 z-50 rounded-md shadow-lg w-[30%] ">
+      <div className="fixed  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white !p-6 z-50 rounded-md shadow-lg  w-[80%] ">
         <div className="flex flex-col gap-4">
           <h2 className="text-lg font-semibold mb-4">oredr #52142167</h2>
           <div className="!pb-8 border-b border-gray-400 flex flex-col gap-2">
@@ -38,7 +38,7 @@ export default function PrintPopUp({ setIsOpen }: PrintPopUpProps) {
           <div className="flex flex-col gap-2 !pb-4">
             {cart.map((item) => (
               <div key={item.id} className="flex items-center justify">
-                <p className="flex-1"> {item.title}</p>
+                <p className="flex-1"> {item.name}</p>
                 <p>{item.quantity}</p>
                 <p>{}</p>
               </div>

@@ -67,10 +67,10 @@ export const OrderDetails = ({
           {cart.map((item) => (
             <OrderItem
               key={item.id}
-              name={item.title}
+              name={item.name}
               quantity={item.quantity}
               price={item.price}
-              image={item.img}
+              image={item.image}
             />
           ))}
         </div>

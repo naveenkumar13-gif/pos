@@ -20,7 +20,7 @@ export const OrderSidebar = ({
   onOrderSelect,
 }: OrderSidebarProps) => {
   return (
-    <div className="w-80 bg-card border-r border-border !p-6">
+    <div className="w-80 bg-card border-r border-border !p-6 max-sm:border-none">
       <h2 className="text-xl font-bold !mb-6">Pending Order</h2>
 
       <div className="!mb-4">
