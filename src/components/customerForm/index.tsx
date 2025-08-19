@@ -1,11 +1,11 @@
+"use client"
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, Upload, User } from "lucide-react";
+import { ArrowLeft, Upload, User, Camera } from "lucide-react";
 import { Customer } from "../customerTable";
-import Image from "next/image";
 
 
 interface CustomerFormProps {
@@ -26,6 +26,7 @@ export const CustomerForm = ({ customer, onSave, onCancel }: CustomerFormProps) 
   });
 
   const [imagePreview, setImagePreview] = useState(customer?.image || "");
+  const [showImageOptions, setShowImageOptions] = useState(false);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -35,6 +36,21 @@ export const CustomerForm = ({ customer, onSave, onCancel }: CustomerFormProps) 
         const result = reader.result as string;
         setImagePreview(result);
         setFormData(prev => ({ ...prev, image: result }));
+        setShowImageOptions(false);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleCameraCapture = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const result = reader.result as string;
+        setImagePreview(result);
+        setFormData(prev => ({ ...prev, image: result }));
+        setShowImageOptions(false);
       };
       reader.readAsDataURL(file);
     }
@@ -56,10 +72,10 @@ export const CustomerForm = ({ customer, onSave, onCancel }: CustomerFormProps) 
   const isEditing = !!customer;
 
   return (
-    <div className="max-w-2xl !mx-auto !space-y-6">
+    <div className="max-w-2xl mx-auto space-y-6">
       {/* Header */}
       <div className="flex items-center gap-4">
-        <Button variant="outline" onClick={onCancel} size="sm" className="!p-2">
+        <Button variant="outline" onClick={onCancel} size="sm">
           <ArrowLeft className="w-4 h-4" />
         </Button>
         <h1 className="text-2xl font-bold text-foreground">
@@ -68,41 +84,83 @@ export const CustomerForm = ({ customer, onSave, onCancel }: CustomerFormProps) 
       </div>
 
       {/* Form */}
-      <Card className="!p-6">
-        <form onSubmit={handleSubmit} className="!space-y-6">
+      <Card className="p-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {/* Image Upload */}
           <div className="text-center space-y-4">
-            <div className="!mx-auto w-32 h-32 rounded-lg border-2 border-dashed border-border flex items-center justify-center overflow-hidden bg-muted">
+            <div 
+              className="mx-auto w-32 h-32 rounded-lg border-2 border-dashed border-border flex items-center justify-center overflow-hidden bg-muted cursor-pointer"
+              onClick={() => setShowImageOptions(true)}
+            >
               {imagePreview ? (
-                <Image
+                <img 
                   src={imagePreview} 
                   alt="Preview" 
                   className="w-full h-full object-cover"
                 />
               ) : (
                 <div className="text-center">
-                  <User className="w-8 h-8 mx-auto text-muted-foreground !mb-2" />
+                  <User className="w-8 h-8 mx-auto text-muted-foreground mb-2" />
                   <Upload className="w-4 h-4 mx-auto text-muted-foreground" />
                 </div>
               )}
             </div>
             <div>
-              <Label htmlFor="image-upload" className="cursor-pointer">
-                <span className="text-sm font-medium text-foreground">Upload Image</span>
-                <Input
-                  id="image-upload"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  className="hidden"
-                />
-              </Label>
+              <span className="text-sm font-medium text-foreground cursor-pointer" onClick={() => setShowImageOptions(true)}>
+                Upload Image
+              </span>
             </div>
+            
+            {/* Hidden file inputs */}
+            <Input
+              id="image-upload"
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="hidden"
+            />
+            <Input
+              id="camera-capture"
+              type="file"
+              accept="image/*"
+              capture="environment"
+              onChange={handleCameraCapture}
+              className="hidden"
+            />
           </div>
+
+          {/* Image Options Modal */}
+          {showImageOptions && (
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowImageOptions(false)}>
+              <div className="bg-background rounded-lg p-6 m-4 max-w-sm w-full" onClick={(e) => e.stopPropagation()}>
+                <div className="grid grid-cols-2 gap-4">
+                  <div 
+                    className="flex flex-col items-center p-6 border-2 border-dashed border-border rounded-lg cursor-pointer hover:bg-muted transition-colors"
+                    onClick={() => document.getElementById('camera-capture')?.click()}
+                  >
+                    <div className="w-16 h-16 bg-muted rounded-lg flex items-center justify-center mb-3">
+                      <Camera className="w-8 h-8 text-muted-foreground" />
+                    </div>
+                    <span className="text-sm font-medium text-foreground">capture image</span>
+                  </div>
+                  
+                  <div 
+                    className="flex flex-col items-center p-6 border-2 border-dashed border-border rounded-lg cursor-pointer hover:bg-muted transition-colors"
+                    onClick={() => document.getElementById('image-upload')?.click()}
+                  >
+                    <div className="w-16 h-16 bg-muted rounded-lg flex items-center justify-center mb-3">
+                      <Upload className="w-8 h-8 text-muted-foreground" />
+                    </div>
+                    <span className="text-sm font-medium text-foreground">Select image</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Form Fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="!space-y-2">
+            <div className="space-y-2">
               <Label htmlFor="name">Full Name:</Label>
               <Input
                 id="name"
@@ -113,7 +171,7 @@ export const CustomerForm = ({ customer, onSave, onCancel }: CustomerFormProps) 
               />
             </div>
 
-            <div className="!space-y-2">
+            <div className="space-y-2">
               <Label htmlFor="orders">Total Orders:</Label>
               <Input
                 id="orders"
@@ -125,7 +183,7 @@ export const CustomerForm = ({ customer, onSave, onCancel }: CustomerFormProps) 
               />
             </div>
 
-            <div className="!space-y-2">
+            <div className="space-y-2">
               <Label htmlFor="spend">Spend ($):</Label>
               <Input
                 id="spend"
@@ -138,7 +196,7 @@ export const CustomerForm = ({ customer, onSave, onCancel }: CustomerFormProps) 
               />
             </div>
 
-            <div className="!space-y-2">
+            <div className="space-y-2">
               <Label htmlFor="gender">Gender:</Label>
               <Input
                 id="gender"
@@ -149,7 +207,7 @@ export const CustomerForm = ({ customer, onSave, onCancel }: CustomerFormProps) 
               />
             </div>
 
-            <div className="!space-y-2">
+            <div className="space-y-2">
               <Label htmlFor="phone">Phone Number:</Label>
               <Input
                 id="phone"
@@ -160,7 +218,7 @@ export const CustomerForm = ({ customer, onSave, onCancel }: CustomerFormProps) 
               />
             </div>
 
-            <div className="!space-y-2">
+            <div className="space-y-2">
               <Label htmlFor="city">City:</Label>
               <Input
                 id="city"
@@ -172,8 +230,8 @@ export const CustomerForm = ({ customer, onSave, onCancel }: CustomerFormProps) 
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-center !pt-4">
-            <Button type="submit" className="bg-primary hover:bg-primary/90 !px-8">
+          <div className="flex justify-center pt-4">
+            <Button type="submit" className="bg-primary hover:bg-primary/90 px-8">
               {isEditing ? 'Update Customer' : 'Save Customer'}
             </Button>
           </div>
