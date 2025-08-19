@@ -81,7 +81,7 @@ const Dashboard = () => {
 
   const handleSaveCustomer = (customerData: Omit<Customer, "id">) => {
     if (editingCustomer) {
-      // Update existing customer
+    
       setCustomers((prev) =>
         prev.map((c) =>
           c.id === editingCustomer.id

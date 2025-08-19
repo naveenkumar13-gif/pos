@@ -35,8 +35,9 @@ export const DeleteConfirmDialog = ({
             Delete this Customer?
           </AlertDialogTitle>
           <AlertDialogDescription className="text-muted-foreground text-center">
-            Are you sure you want to delete {customer?.name}? This action cannot
-            be undone.
+            Are you sure you want to delete{" "}
+            <span className="text-red-500">{customer?.name}</span>? This action
+            cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter className=" flex  flex-col sm:flex-row gap-2 items-center justify-center">
