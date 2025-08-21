@@ -5,7 +5,7 @@ import { Home } from "lucide-react";
 import { OrderSidebar } from "@/components/orderSiderbar";
 import { OrderDetails } from "@/components/orderDetails";
 
-// Mock data
+
 const orders = [
   {
     id: "Order #253687",

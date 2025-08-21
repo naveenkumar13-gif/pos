@@ -1,12 +1,13 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { product } from "../../public/images";
 
 export interface MenuItem {
   id: number;
   name: string;
   price: number;
   description: string;
-  image: string;
+  image: typeof product;
   rating: number;
   category: string;
 }

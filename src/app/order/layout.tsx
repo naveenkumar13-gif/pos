@@ -1,7 +1,7 @@
-import Header from "@/components/header";
-import Sidebar from "@/components/sidebar";
-import { useIsMobile } from "@/hooks/useMobile";
-import React from "react";
+import React from 'react';
+import Header from '@/components/header';
+import { useIsMobile } from '@/hooks/useMobile';
+import Sidebar from '@/components/sidebar';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -9,12 +9,12 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const isMobile = useIsMobile();
-
+  
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <Sidebar />
-      <main className={`!px-10 max-sm:!p-0 ${!isMobile ? "!ml-20" : ""}`}>
+      <main className={`pb-20 md:pb-0 ${!isMobile ? 'ml-20' : ''}`}>
         {children}
       </main>
     </div>

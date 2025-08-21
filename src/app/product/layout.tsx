@@ -1,6 +1,4 @@
-import Header from "@/components/header";
 import Sidebar from "@/components/sidebar";
-import { useIsMobile } from "@/hooks/useMobile";
 import React from "react";
 
 interface LayoutProps {
@@ -8,15 +6,10 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const isMobile = useIsMobile();
-
   return (
     <div className="min-h-screen bg-background">
-      <Header />
       <Sidebar />
-      <main className={`!px-10 max-sm:!p-0 ${!isMobile ? "!ml-20" : ""}`}>
-        {children}
-      </main>
+      <main className={` !px-10 max-sm:!p-0 max-w-5xl !mx-auto bg-red-50  `}>{children}</main>
     </div>
   );
 }

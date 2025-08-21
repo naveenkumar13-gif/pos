@@ -121,7 +121,7 @@ const ProductTable = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background !p-4 !md:p-6">
+    <div className="min-h-screen bg-background  !p-4 !md:p-6">
       <div className=" ">
         <div
           className="!mb-6  flex items-center justify-between "
@@ -349,7 +349,7 @@ const ProductTable = () => {
                       variant="ghost"
                       size="sm"
                       onClick={() => handleEdit(product.id)}
-                      className="text-emerald-600 hover:text-emerald-700 hover:bg-emerald-600/10 !mx-2"
+                      className="text-emerald-600 hover:text-emerald-700 hover:bg-emerald-600/10  !p-2"
                     >
                       <Edit className="!mr-1 h-3 w-3" />
                     </Button>
@@ -357,7 +357,7 @@ const ProductTable = () => {
                       variant="ghost"
                       size="sm"
                       onClick={() => handleDelete(product.id)}
-                      className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                      className="text-destructive hover:text-destructive hover:bg-destructive/10 !p-2"
                     >
                       <Trash2 className="!mr-1 h-3 w-3" />
                     </Button>

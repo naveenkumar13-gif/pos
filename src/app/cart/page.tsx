@@ -14,30 +14,7 @@ function CartAside() {
   const { cart, getTotalPrice } = useCartStore();
   const route = useRouter();
   return (
-    <div className=" h-full !p-4 border-l border-stone-300   max-sm:w-full  ">
-      <header className="flex items-center justify-between !p-4 !pt-12  max-sm:!p-2">
-        <div className="flex items-center gap-3">
-          <Button className="text-foreground !shadow-none !p-0">
-            <Menu className="h-6 w-6" />
-          </Button>
-          <h1 className="text-xl font-bold">
-            Bill <span className="text-primary">Mate</span>
-          </h1>
-        </div>
-        <Button className="text-foreground">
-          <ShoppingCart className="h-5 w-5" />
-        </Button>
-      </header>
-
-      <div className="!px-4 !my-6">
-        <div className="relative">
-          <Input
-            placeholder="Search..."
-            className="!pl-4 !pr-10 !py-3 bg-muted border-0 rounded-lg"
-          />
-          <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-        </div>
-      </div>
+    <div className=" h-full !p-4   max-sm:w-full  ">
       <div className="h-full">
         {cart.length === 0 ? (
           <div className="max-w-4xl !mx-auto  !px-4 !py-8 flex items-center justify-center">

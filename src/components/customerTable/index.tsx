@@ -42,7 +42,7 @@ export const CustomerTable = ({
     <div className="!space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 className="text-2xl font-bold text-foreground">
+        <h1 className="text-2xl font-bold text-foreground max-sm:flex">
           Customer Management
         </h1>
         <Button
@@ -74,7 +74,7 @@ export const CustomerTable = ({
                 <AvatarImage
                   src={customer.image}
                   alt={customer.name}
-                  width={40} 
+                  width={40}
                   height={40}
                   className="rounded-full object-cover"
                 />

@@ -141,7 +141,7 @@ const ProductForm = () => {
   };
 
   return (
-    <div className=" bg-background flex gap-4 !p-4">
+    <div className=" bg-background flex gap-4 !p-4 max-sm:!p-0">
       <Toaster position="top-right" />
       <Aside />
       <div className="flex-1">

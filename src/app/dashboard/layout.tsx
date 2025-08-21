@@ -1,21 +1,21 @@
-import Header from "@/components/header";
-import Sidebar from "@/components/sidebar";
-import { useIsMobile } from "@/hooks/useMobile";
-import React from "react";
+import React from 'react';
+import Header from '@/components/header';
+import Sidebar from '@/components/sidebar';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
-
+  ;
+  
   return (
     <div className="min-h-screen bg-background">
-   
+      
       <Sidebar />
-      <main className={`!px-10 max-sm:!p-0 `}>
+      <main className={`!px-20 max-sm:!p-4  !mx-auto `}>
         {children}
       </main>
     </div>
-  );
+  )
 }

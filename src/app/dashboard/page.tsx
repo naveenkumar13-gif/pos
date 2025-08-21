@@ -1,152 +1,75 @@
 "use client";
-import { CustomerForm } from "@/components/customerForm";
-import { Customer, CustomerTable } from "@/components/customerTable";
-import { DeleteConfirmDialog } from "@/components/deleteConfirm";
-import { useToast } from "@/lib/utils";
 import { useState } from "react";
+import { Home } from "lucide-react";
+import { BalanceCard } from "@/components/balanceCard";
+import { StatsCard } from "@/components/statsCard";
+import { TimeFilters } from "@/components/timeFilter";
+import { IncomeChart } from "@/components/incomChart";
+import { DailySellingChart } from "@/components/dailySelling";
+import { BestDishes } from "@/components/bestDishes";
 
-const initialCustomers: Customer[] = [
-  {
-    id: "1",
-    name: "Dhlip Kumar",
-    orders: 110,
-    spend: 5000,
-    gender: "Male",
-    phone: "9874561230",
-    city: "Mumbai",
-    image:
-      "",
+const balanceData = {
+  "Today": {
+    totalBalance: "₹30,000",
+    income: { amount: "₹4,000", change: "(+20% increase)", isPositive: true },
+    expense: { amount: "₹4,000", change: "(+10% increase)", isPositive: true },
   },
-  {
-    id: "2",
-    name: "Sarah Johnson",
-    orders: 85,
-    spend: 3200,
-    gender: "Female",
-    phone: "9876543210",
-    city: "Delhi",
-    image:
-      "",
+  "This Week": {
+    totalBalance: "₹4,50,000",
+    income: { amount: "₹4,000", change: "(+20% increase)", isPositive: true },
+    expense: { amount: "₹4,000", change: "(+10% increase)", isPositive: true },
   },
-  {
-    id: "3",
-    name: "Michael Chen",
-    orders: 67,
-    spend: 2800,
-    gender: "Male",
-    phone: "9123456789",
-    city: "Bangalore",
-    image:
-      "",
+  "This Month": {
+    totalBalance: "₹6,50,000",
+    income: { amount: "₹4,000", change: "(+20% increase)", isPositive: true },
+    expense: { amount: "₹4,000", change: "(+10% increase)", isPositive: true },
   },
-  {
-    id: "4",
-    name: "Emily Davis",
-    orders: 92,
-    spend: 4100,
-    gender: "Female",
-    phone: "9234567890",
-    city: "Chennai",
-    image:
-      "",
+  "This Year": {
+    totalBalance: "₹10,50,000",
+    income: { amount: "₹4,000", change: "(+20% increase)", isPositive: true },
+    expense: { amount: "₹4,000", change: "(+10% increase)", isPositive: true },
   },
-];
+};
 
-const Dashboard = () => {
-  const [customers, setCustomers] = useState<Customer[]>(initialCustomers);
-  const [currentView, setCurrentView] = useState<"table" | "form">("table");
-  const [editingCustomer, setEditingCustomer] = useState<
-    Customer | undefined
-  >();
-  const [deleteDialog, setDeleteDialog] = useState<{
-    open: boolean;
-    customer: Customer | null;
-  }>({ open: false, customer: null });
-
-  const { toast } = useToast();
-
-  const handleAddCustomer = () => {
-    setEditingCustomer(undefined);
-    setCurrentView("form");
-  };
-
-  const handleEditCustomer = (customer: Customer) => {
-    setEditingCustomer(customer);
-    setCurrentView("form");
-  };
-
-  const handleDeleteCustomer = (customer: Customer) => {
-    setDeleteDialog({ open: true, customer });
-  };
-
-  const handleSaveCustomer = (customerData: Omit<Customer, "id">) => {
-    if (editingCustomer) {
-    
-      setCustomers((prev) =>
-        prev.map((c) =>
-          c.id === editingCustomer.id
-            ? { ...customerData, id: editingCustomer.id }
-            : c
-        )
-      );
-      toast("Customer updated successfully!");
-    } else {
-     
-      const newCustomer: Customer = {
-        ...customerData,
-        id: Date.now().toString(),
-      };
-      setCustomers((prev) => [...prev, newCustomer]);
-      toast("Customer added successfully!");
-    }
-    setCurrentView("table");
-    setEditingCustomer(undefined);
-  };
-
-  const handleConfirmDelete = () => {
-    if (deleteDialog.customer) {
-      setCustomers((prev) =>
-        prev.filter((c) => c.id !== deleteDialog.customer!.id)
-      );
-      toast("Customer deleted successfully!");
-    }
-    setDeleteDialog({ open: false, customer: null });
-  };
-
-  const handleCancelForm = () => {
-    setCurrentView("table");
-    setEditingCustomer(undefined);
-  };
+const Index = () => {
+  const [activeFilter, setActiveFilter] = useState("This Year");
 
   return (
     <div className="min-h-screen bg-background">
-      {/* <Navbar /> */}
+      <div className="border-b bg-card">
+        <div className="container !mx-auto !px-4 !py-4 lg:!px-6">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <Home className="w-6 h-6 text-primary" />
+              <h1 className="text-2xl font-bold text-foreground">Manager Dashboard</h1>
+            </div>
+            <TimeFilters activeFilter={activeFilter} onFilterChange={setActiveFilter} />
+          </div>
+        </div>
+      </div>
+      <div className="container !mx-auto !px-4 !py-6 lg:!px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+         
+          <StatsCard title="Total Income">
+            <IncomeChart />
+          </StatsCard>
 
-      <main className="max-w-7xl !mx-auto !px-4 sm:!px-6 lg:!px-8 !py-8 ">
-        {currentView === "table" ? (
-          <CustomerTable
-            customers={customers}
-            onAddCustomer={handleAddCustomer}
-            onEditCustomer={handleEditCustomer}
-            onDeleteCustomer={handleDeleteCustomer}
-          />
-        ) : (
-          <CustomerForm
-            customer={editingCustomer}
-            onSave={handleSaveCustomer}
-            onCancel={handleCancelForm}
-          />
-        )}
-      </main>
+          
+          <StatsCard title="Total Balance">
+            <BalanceCard data={balanceData[activeFilter as keyof typeof balanceData]} />
+          </StatsCard>
 
-      <DeleteConfirmDialog
-        open={deleteDialog.open}
-        onOpenChange={(open) => setDeleteDialog({ open, customer: null })}
-        customer={deleteDialog.customer}
-        onConfirm={handleConfirmDelete}
-      />
+          <StatsCard title="Daily Selling">
+            <DailySellingChart />
+          </StatsCard>
+
+          <StatsCard title="Best Dishes">
+            <BestDishes />
+          </StatsCard>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default Index;

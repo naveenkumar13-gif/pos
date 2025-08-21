@@ -88,7 +88,7 @@ export const useStore = create<AppState>((set, get) => ({
     const state = get();
     return state.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
   },
-  
+  // total quantity item
   getTotalItems: () => {
     const state = get();
     return state.cart.reduce((total, item) => total + item.quantity, 0);

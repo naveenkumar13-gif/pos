@@ -13,7 +13,7 @@ export const menuItems = [
     price: 199,
     description:
       "Juicy grilled patty topped with melted cheese, fresh lettuce, tomato, and our secret sauce.",
-    image: product,
+    image: product || "",
     rating: 5.0,
     category: "",
   },
@@ -23,7 +23,7 @@ export const menuItems = [
     price: 249,
     description:
       "Aromatic basmati rice with tender chicken, spices, and herbs cooked to perfection.",
-    image: product,
+     image: product || "",
     rating: 4.9,
     category: "",
   },
@@ -33,7 +33,7 @@ export const menuItems = [
     price: 179,
     description:
       "Grilled paneer cubes marinated in spiced yogurt served with mint chutney.",
-    image: product,
+     image: product || "",
     rating: 4.8,
     category: "",
   },
@@ -43,7 +43,7 @@ export const menuItems = [
     price: 99,
     description:
       "Crispy golden fries served with tangy tomato ketchup and cheese dip.",
-    image: product,
+     image: product || "",
     rating: 4.7,
     category: "",
   },
@@ -53,7 +53,7 @@ export const menuItems = [
     price: 199,
     description:
       "Crispy base loaded with fresh veggies, mozzarella cheese, and tangy sauce.",
-    image: product,
+     image: product || "",
     rating: 4.6,
     category: "",
   },
@@ -63,7 +63,7 @@ export const menuItems = [
     price: 129,
     description:
       "Steamed dumplings filled with spicy vegetables or chicken, served with hot sauce.",
-    image: product,
+     image: product || "",
     rating: 4.5,
     category: "",
   },

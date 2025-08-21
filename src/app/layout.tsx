@@ -3,6 +3,7 @@ import { Roboto, Inter } from "next/font/google";
 // import { Toaster } from "@components/ui/toaster";
 import "./globals.css";
 import { Toaster } from "sonner";
+import Header from "@/components/header";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -28,6 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${roboto.variable} ${inter.variable} antialiased`}>
         <Toaster richColors position="top-right" />
+        <Header/>
         {children}
       </body>
     </html>
