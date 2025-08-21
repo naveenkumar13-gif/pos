@@ -12,9 +12,8 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
       <Sidebar />
-      <main className={`!px-10 max-sm:!p-0 ${!isMobile ? "!ml-20" : ""}`}>
+      <main className={`!px-10 max-sm:!p-8 ${!isMobile ? "!ml-20" : ""}`}>
         {children}
       </main>
     </div>

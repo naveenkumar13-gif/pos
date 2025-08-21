@@ -1,0 +1,103 @@
+"use client";
+
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { message } from "antd";
+
+export default function PersonalInformation() {
+  const [formData, setFormData] = useState({
+    firstName: "Soul",
+    lastName: "Man",
+    email: "soulman@gmail.com",
+    phone: "+91 7568695210",
+    dateOfBirth: "23/05/1989",
+    position: "Manager",
+    description:
+      "As a manager, Soul Man oversees team operations and ensures service standards are consistently met. He supports strategic planning, encourages collaboration, and drives performance. His leadership fosters a productive work environment focused on growth and efficiency.",
+  });
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSave = () => {
+    message.success("Personal Information saved successfully!");
+  };
+
+  return (
+    <div className="max-w-2xl">
+      <h2 className="text-2xl font-bold mb-2">Personal Information</h2>
+      <Textarea
+        value={formData.description}
+        onChange={(e) => handleInputChange("description", e.target.value)}
+        className="mb-6 min-h-[100px] resize-none"
+        placeholder="Description..."
+      />
+
+      <div className="grid grid-cols-2 gap-6 mb-6">
+        <div>
+          <Label htmlFor="firstName">First Name</Label>
+          <Input
+            id="firstName"
+            value={formData.firstName}
+            onChange={(e) => handleInputChange("firstName", e.target.value)}
+          />
+        </div>
+        <div>
+          <Label htmlFor="lastName">Last Name</Label>
+          <Input
+            id="lastName"
+            value={formData.lastName}
+            onChange={(e) => handleInputChange("lastName", e.target.value)}
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-6 mb-6">
+        <div>
+          <Label htmlFor="email">Email</Label>
+          <Input
+            id="email"
+            type="email"
+            value={formData.email}
+            onChange={(e) => handleInputChange("email", e.target.value)}
+          />
+        </div>
+        <div>
+          <Label htmlFor="phone">Phone Number</Label>
+          <Input
+            id="phone"
+            value={formData.phone}
+            onChange={(e) => handleInputChange("phone", e.target.value)}
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-6 mb-8">
+        <div>
+          <Label htmlFor="dateOfBirth">Date Of Birth</Label>
+          <Input
+            id="dateOfBirth"
+            value={formData.dateOfBirth}
+            onChange={(e) => handleInputChange("dateOfBirth", e.target.value)}
+          />
+        </div>
+        <div>
+          <Label htmlFor="position">Position</Label>
+          <Input
+            id="position"
+            value={formData.position}
+            onChange={(e) => handleInputChange("position", e.target.value)}
+          />
+        </div>
+      </div>
+
+      <Button onClick={handleSave} className="w-full">
+        Save Changes
+      </Button>
+    </div>
+  );
+}
