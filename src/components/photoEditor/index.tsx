@@ -8,7 +8,14 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Upload, Camera, Trash2, RotateCw, ZoomIn, ZoomOut } from "lucide-react";
+import {
+  Upload,
+  Camera,
+  Trash2,
+  RotateCw,
+  ZoomIn,
+  ZoomOut,
+} from "lucide-react";
 import { message } from "antd";
 
 interface PhotoEditorProps {
@@ -18,7 +25,7 @@ interface PhotoEditorProps {
 
 export default function PhotoEditor({ isOpen, onClose }: PhotoEditorProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [currentPhoto, setCurrentPhoto] = useState('');
+  const [currentPhoto, setCurrentPhoto] = useState("");
   const [zoom, setZoom] = useState(100);
   const [rotation, setRotation] = useState(0);
 
@@ -44,34 +51,34 @@ export default function PhotoEditor({ isOpen, onClose }: PhotoEditorProps) {
   };
 
   const handleRotate = () => {
-    setRotation(prev => (prev + 90) % 360);
+    setRotation((prev) => (prev + 90) % 360);
   };
 
   const handleZoomIn = () => {
-    setZoom(prev => Math.min(prev + 10, 200));
+    setZoom((prev) => Math.min(prev + 10, 200));
   };
 
   const handleZoomOut = () => {
-    setZoom(prev => Math.max(prev - 10, 50));
+    setZoom((prev) => Math.max(prev - 10, 50));
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md">
+      <DialogContent className="max-w-md  !p-4">
         <DialogHeader>
           <DialogTitle>Edit Profile Photo</DialogTitle>
         </DialogHeader>
-        
-        <div className="space-y-6">
+
+        <div className="!space-y-6  ">
           <div className="flex justify-center">
             <div className="relative">
               <Avatar className="w-32 h-32">
-                <AvatarImage 
-                  src={currentPhoto} 
-                  alt="Profile" 
+                <AvatarImage
+                  src={currentPhoto}
+                  alt="Profile"
                   style={{
                     transform: `rotate(${rotation}deg) scale(${zoom / 100})`,
-                    transformOrigin: "center"
+                    transformOrigin: "center",
                   }}
                 />
                 <AvatarFallback>SM</AvatarFallback>
@@ -79,7 +86,7 @@ export default function PhotoEditor({ isOpen, onClose }: PhotoEditorProps) {
             </div>
           </div>
 
-          <div className="flex justify-center space-x-2">
+          <div className="flex justify-center gap-5">
             <Button
               size="icon"
               variant="outline"
@@ -96,11 +103,7 @@ export default function PhotoEditor({ isOpen, onClose }: PhotoEditorProps) {
             >
               <ZoomIn className="w-4 h-4" />
             </Button>
-            <Button
-              size="icon"
-              variant="outline"
-              onClick={handleRotate}
-            >
+            <Button size="icon" variant="outline" onClick={handleRotate}>
               <RotateCw className="w-4 h-4" />
             </Button>
           </div>
@@ -114,10 +117,7 @@ export default function PhotoEditor({ isOpen, onClose }: PhotoEditorProps) {
               <Upload className="w-4 h-4" />
               Upload
             </Button>
-            <Button
-              variant="outline"
-              className="flex items-center gap-2"
-            >
+            <Button variant="outline" className="flex items-center gap-2">
               <Camera className="w-4 h-4" />
               Camera
             </Button>
@@ -132,9 +132,7 @@ export default function PhotoEditor({ isOpen, onClose }: PhotoEditorProps) {
               <Trash2 className="w-4 h-4" />
               Remove
             </Button>
-            <Button onClick={handleSave}>
-              Save Photo
-            </Button>
+            <Button onClick={handleSave}>Save Photo</Button>
           </div>
         </div>
 

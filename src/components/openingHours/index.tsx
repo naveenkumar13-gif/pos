@@ -7,7 +7,6 @@ import { Card } from "@/components/ui/card";
 import { ChevronLeft } from "lucide-react";
 import { message } from "antd";
 
-
 interface DaySchedule {
   day: string;
   hours: string;
@@ -15,7 +14,6 @@ interface DaySchedule {
 }
 
 export default function OpeningHours() {
- 
   const [isEditing, setIsEditing] = useState(false);
   const [schedule, setSchedule] = useState<DaySchedule[]>([
     { day: "Monday", hours: "08:00 am-08:00 pm", isOpen: true },
@@ -28,8 +26,8 @@ export default function OpeningHours() {
   ]);
 
   const handleHoursChange = (index: number, newHours: string) => {
-    setSchedule(prev => 
-      prev.map((item, i) => i === index ? { ...item, hours: newHours } : item)
+    setSchedule((prev) =>
+      prev.map((item, i) => (i === index ? { ...item, hours: newHours } : item))
     );
   };
 
@@ -40,7 +38,7 @@ export default function OpeningHours() {
 
   if (isEditing) {
     return (
-      <div className="max-w-2xl">
+      <div className="max-w-2xl !p-4">
         <div className="flex items-center gap-4 mb-6">
           <Button
             variant="ghost"
@@ -59,10 +57,10 @@ export default function OpeningHours() {
           </Button>
         </div>
 
-        <div className="space-y-4">
+        <div className="!space-y-4">
           {schedule.map((item, index) => (
             <div key={item.day}>
-              <Label htmlFor={`hours-${item.day}`} className="block mb-2">
+              <Label htmlFor={`hours-${item.day}`} className="block !mb-2">
                 {item.day}
               </Label>
               <Input
@@ -80,7 +78,7 @@ export default function OpeningHours() {
 
   return (
     <div className="max-w-2xl">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center !mb-6">
         <h2 className="text-2xl font-bold">Opening Hours</h2>
         <Button
           variant="ghost"
@@ -91,8 +89,8 @@ export default function OpeningHours() {
         </Button>
       </div>
 
-      <Card className="p-6">
-        <div className="space-y-4">
+      <Card className="!p-6">
+        <div className="!space-y-4">
           {schedule.map((item) => (
             <div key={item.day} className="flex items-center justify-between">
               <div className="flex items-center gap-3">

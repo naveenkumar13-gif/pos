@@ -1,14 +1,11 @@
 "use client";
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import useCartStore from "@/store/useCart";
 
 import Button from "@/components/button/index";
 import { useRouter } from "next/navigation";
 import OrderItem from "@/components/orderItem";
-import { Menu, Search, ShoppingCart } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { ShoppingCart } from "lucide-react";
 
 function CartAside() {
   const { cart, getTotalPrice } = useCartStore();

@@ -11,7 +11,7 @@ function OrderItem() {
 
   return (
     <div className="">
-      <div className="flex items-center justify-between !mb-6 ">
+      <div className="flex items-center justify-between !mb-6  ">
         <h2>Order #7465738</h2>
         <span>
           <FontAwesomeIcon
@@ -24,7 +24,7 @@ function OrderItem() {
       {cart.map((item) => (
         <div
           key={item.id}
-          className="flex !items-center justify-between  gap-2 !mb-4  !p-2 rounded-md "
+          className="flex !items-center justify-between  gap-2 !mb-4  !p-2 rounded-md  shadow-2xs border"
         >
           <div>
             <Image src={item.image} alt={item.name} width={100} height={100} />

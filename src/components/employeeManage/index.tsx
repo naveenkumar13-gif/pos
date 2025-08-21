@@ -97,30 +97,29 @@ export default function EmployeesManagement() {
       );
       setIsEditDialogOpen(false);
       setEditingEmployee(null);
-      message.info(
-        `Employee ${editingEmployee.name} updated successfully!`,);
+      message.info(`Employee ${editingEmployee.name} updated successfully!`);
     }
   };
 
   const handleAddEmployee = () => {
     // Validate required fields
     if (!newEmployee.name?.trim()) {
-      message.error("Please enter the employee's name.",);
+      message.error("Please enter the employee's name.");
       return;
     }
 
     if (!newEmployee.email?.trim()) {
-      message.error("Please enter the employee's email.",);
+      message.error("Please enter the employee's email.");
       return;
     }
 
     if (!newEmployee.username?.trim()) {
-      message.error("Please enter a username.",);
+      message.error("Please enter a username.");
       return;
     }
 
     if (!newEmployee.password?.trim()) {
-      message.error("Please enter a password.",);
+      message.error("Please enter a password.");
       return;
     }
 
@@ -131,9 +130,7 @@ export default function EmployeesManagement() {
     );
 
     if (existingEmployee) {
-      message.error(
-        "An employee with this username or email already exists.",
-      );
+      message.error("An employee with this username or email already exists.");
       return;
     }
 
@@ -164,12 +161,14 @@ export default function EmployeesManagement() {
 
     setIsAddDialogOpen(false);
 
-    message.success(`${employee.name} has been added successfully with ID ${employee.employeeId}.`);
+    message.success(
+      `${employee.name} has been added successfully with ID ${employee.employeeId}.`
+    );
   };
 
   return (
-    <div className="max-w-5xl">
-      <div className="flex justify-between items-center mb-6">
+    <div className="max-w-5xl !p-4">
+      <div className="flex justify-between items-center !mb-6">
         <h2 className="text-2xl font-bold">Employees</h2>
         <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
           <DialogTrigger asChild>
@@ -179,7 +178,7 @@ export default function EmployeesManagement() {
             <DialogHeader>
               <DialogTitle>Add New Employees</DialogTitle>
             </DialogHeader>
-            <div className="space-y-4">
+            <div className="!space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="newFirstName">First Name</Label>
