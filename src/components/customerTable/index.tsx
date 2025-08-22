@@ -41,8 +41,8 @@ export const CustomerTable = ({
   return (
     <div className="!space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 className="text-2xl font-bold text-foreground max-sm:flex">
+      <div className="flex items-center justify-between ">
+        <h1 className="text-2xl font-bold text-foreground max-sm:flex max-sm:text-lg">
           Customer Management
         </h1>
         <Button
@@ -54,7 +54,7 @@ export const CustomerTable = ({
         </Button>
       </div>
 
-      {/* Search */}
+      
       <div className="relative max-w-md">
         <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
         <Input

@@ -11,7 +11,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-background">
       <Sidebar />
-      <main className={`!px-20 md:pb-0 bg-red-200  `}>{children}</main>
+      <main className={`!px-20 max-sm:!px-4   `}>{children}</main>
     </div>
   );
 }

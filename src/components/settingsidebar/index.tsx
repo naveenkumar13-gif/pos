@@ -25,7 +25,11 @@ export default function SettingsSidebar({
   ];
 
   return (
-    <div className="w-80 bg-background border-r min-h-screen !p-6  max-sm:border-none max-sm:w-full max-sm:!p-0">
+    <div
+      className="w-80 bg-background border-r min-h-screen !p-6  max-sm:border-none max-sm:w-full max-sm:!p-0 max-sm:min-h-0
+      
+    "
+    >
       <h1 className="text-2xl font-bold !mb-8">Settings</h1>
 
       <Card className="!p-6 !mb-6 text-center  flex flex-col items-center  ">
