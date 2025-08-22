@@ -14,8 +14,7 @@ const initialCustomers: Customer[] = [
     gender: "Male",
     phone: "9874561230",
     city: "Mumbai",
-    image:
-      "",
+    image: "",
   },
   {
     id: "2",
@@ -25,8 +24,7 @@ const initialCustomers: Customer[] = [
     gender: "Female",
     phone: "9876543210",
     city: "Delhi",
-    image:
-      "",
+    image: "",
   },
   {
     id: "3",
@@ -36,8 +34,7 @@ const initialCustomers: Customer[] = [
     gender: "Male",
     phone: "9123456789",
     city: "Bangalore",
-    image:
-      "",
+    image: "",
   },
   {
     id: "4",
@@ -47,8 +44,7 @@ const initialCustomers: Customer[] = [
     gender: "Female",
     phone: "9234567890",
     city: "Chennai",
-    image:
-      "",
+    image: "",
   },
 ];
 
@@ -81,7 +77,6 @@ const Dashboard = () => {
 
   const handleSaveCustomer = (customerData: Omit<Customer, "id">) => {
     if (editingCustomer) {
-    
       setCustomers((prev) =>
         prev.map((c) =>
           c.id === editingCustomer.id
@@ -91,7 +86,6 @@ const Dashboard = () => {
       );
       toast("Customer updated successfully!");
     } else {
-     
       const newCustomer: Customer = {
         ...customerData,
         id: Date.now().toString(),
@@ -122,7 +116,7 @@ const Dashboard = () => {
     <div className="min-h-screen bg-background">
       {/* <Navbar /> */}
 
-      <main className="max-w-7xl !mx-auto !px-4 sm:!px-6 lg:!px-8 !py-8 ">
+      <main className="!px-4 sm:!px-6 lg:!px-8 !py-8 ">
         {currentView === "table" ? (
           <CustomerTable
             customers={customers}

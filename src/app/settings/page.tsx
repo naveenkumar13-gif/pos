@@ -5,6 +5,7 @@ import PersonalInformation from "@/components/personalInformation";
 import EmployeesManagement from "@/components/employeeManage";
 import OpeningHours from "@/components/openingHours";
 import PhotoEditor from "@/components/photoEditor";
+import LoginPage from "@/components/loginMananger";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("personal");
@@ -19,27 +20,21 @@ const Index = () => {
       case "hours":
         return <OpeningHours />;
       case "login":
-        return (
-          <div className="max-w-2xl">
-            <h2 className="text-2xl font-bold !mb-6">Login & Password</h2>
-            <p className="text-muted-foreground">
-              Login and password settings will be available here.
-            </p>
-          </div>
-        );
+        return <LoginPage />;
+
       default:
         return <PersonalInformation />;
     }
   };
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="min-h-screen bg-background flex max-sm:flex-col ">
       <SettingsSidebar
         activeSection={activeSection}
         onSectionChange={setActiveSection}
         onPhotoEdit={() => setIsPhotoEditorOpen(true)}
       />
-      <div className="flex-1 !p-8">{renderContent()}</div>
+      <div className="flex-1 !p-6 max-sm:!p-3">{renderContent()}</div>
       <PhotoEditor
         isOpen={isPhotoEditorOpen}
         onClose={() => setIsPhotoEditorOpen(false)}

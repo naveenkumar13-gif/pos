@@ -28,7 +28,7 @@ export default function PersonalInformation() {
   };
 
   return (
-    <div className="max-w-3xl  !p-4">
+    <div className="max-w-4xl   ">
       <h2 className="text-2xl font-bold !mb-2">Personal Information</h2>
       <Textarea
         value={formData.description}

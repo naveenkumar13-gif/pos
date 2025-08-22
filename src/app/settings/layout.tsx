@@ -1,5 +1,5 @@
-import Sidebar from "@/components/sidebar";
 import React from "react";
+import Sidebar from "@/components/sidebar";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -7,9 +7,9 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="min-h-screen bg-background max-w-4xl !mx-auto ">
+    <div className="min-h-screen bg-background">
       <Sidebar />
-      <main className={` !px-10 max-sm:!p-0   `}>{children}</main>
+      <main className={`!px-20 max-sm:!p-4 !mx-auto `}>{children}</main>
     </div>
   );
 }

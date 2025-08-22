@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Edit, Trash2, AlertTriangle } from "lucide-react";
 import { message } from "antd";
+import { Textarea } from "../ui/textarea";
 
 interface Employee {
   id: string;
@@ -41,6 +42,7 @@ interface Employee {
   dateOfBirth?: string;
   username?: string;
   password?: string;
+  description?: string;
 }
 
 export default function EmployeesManagement() {
@@ -67,6 +69,7 @@ export default function EmployeesManagement() {
     dateOfBirth: "",
     username: "",
     password: "",
+    description: "",
   });
 
   // Generate unique employee ID
@@ -102,7 +105,6 @@ export default function EmployeesManagement() {
   };
 
   const handleAddEmployee = () => {
-    // Validate required fields
     if (!newEmployee.name?.trim()) {
       message.error("Please enter the employee's name.");
       return;
@@ -122,8 +124,6 @@ export default function EmployeesManagement() {
       message.error("Please enter a password.");
       return;
     }
-
-    // Check for duplicate username or email
     const existingEmployee = employees.find(
       (emp) =>
         emp.username === newEmployee.username || emp.email === newEmployee.email
@@ -143,12 +143,12 @@ export default function EmployeesManagement() {
       position: newEmployee.position?.trim() || "",
       dateOfBirth: newEmployee.dateOfBirth?.trim() || "",
       username: newEmployee.username.trim(),
-      password: newEmployee.password, // In real app, this would be hashed
+      password: newEmployee.password,
+      description: newEmployee.description?.trim() || "",
     };
 
     setEmployees((prev) => [...prev, employee]);
 
-    // Reset form
     setNewEmployee({
       name: "",
       email: "",
@@ -157,6 +157,7 @@ export default function EmployeesManagement() {
       dateOfBirth: "",
       username: "",
       password: "",
+      description: "",
     });
 
     setIsAddDialogOpen(false);
@@ -167,22 +168,23 @@ export default function EmployeesManagement() {
   };
 
   return (
-    <div className="max-w-5xl !p-4">
+    <div className="max-w-5xl !p-4 max-sm:!p-0 max-sm:bg-red-200">
       <div className="flex justify-between items-center !mb-6">
         <h2 className="text-2xl font-bold">Employees</h2>
         <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
           <DialogTrigger asChild>
-            <Button>+Add Product</Button>
+            <Button className="!p-2">+Add Product</Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl">
+          <DialogContent className="max-w-2xl !p-4">
             <DialogHeader>
               <DialogTitle>Add New Employees</DialogTitle>
             </DialogHeader>
-            <div className="!space-y-4">
+            <div className="!space-y-4  ">
               <div className="grid grid-cols-2 gap-4">
-                <div>
+                <div className="!space-y-2">
                   <Label htmlFor="newFirstName">First Name</Label>
                   <Input
+                    className="!p-2"
                     id="newFirstName"
                     value={newEmployee.name?.split(" ")[0] || ""}
                     onChange={(e) => {
@@ -196,9 +198,10 @@ export default function EmployeesManagement() {
                     required
                   />
                 </div>
-                <div>
+              <div className="!space-y-2">
                   <Label htmlFor="newLastName">Last Name</Label>
                   <Input
+                   className="!p-2"
                     id="newLastName"
                     value={newEmployee.name?.split(" ")[1] || ""}
                     onChange={(e) => {
@@ -214,9 +217,10 @@ export default function EmployeesManagement() {
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div>
+                <div className="!space-y-2">
                   <Label htmlFor="newEmail">Email</Label>
                   <Input
+                   className="!p-2"
                     id="newEmail"
                     type="email"
                     value={newEmployee.email || ""}
@@ -230,9 +234,10 @@ export default function EmployeesManagement() {
                     required
                   />
                 </div>
-                <div>
+               <div className="!space-y-2">
                   <Label htmlFor="newPhone">Phone Number</Label>
                   <Input
+                   className="!p-2"
                     id="newPhone"
                     value={newEmployee.phone || ""}
                     onChange={(e) =>
@@ -246,9 +251,10 @@ export default function EmployeesManagement() {
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div>
+                <div className="!space-y-2">
                   <Label htmlFor="newUsername">Username</Label>
                   <Input
+                   className="!p-2"
                     id="newUsername"
                     value={newEmployee.username || ""}
                     onChange={(e) =>
@@ -261,9 +267,10 @@ export default function EmployeesManagement() {
                     required
                   />
                 </div>
-                <div>
+               <div className="!space-y-2">
                   <Label htmlFor="newPassword">Password</Label>
                   <Input
+                   className="!p-2"
                     id="newPassword"
                     type="password"
                     value={newEmployee.password || ""}
@@ -279,9 +286,10 @@ export default function EmployeesManagement() {
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div>
+                <div className="!space-y-2">
                   <Label htmlFor="newDateOfBirth">Date Of Birth</Label>
                   <Input
+                   className="!p-2"
                     id="newDateOfBirth"
                     value={newEmployee.dateOfBirth || ""}
                     onChange={(e) =>
@@ -293,9 +301,10 @@ export default function EmployeesManagement() {
                     placeholder="12/05/2004"
                   />
                 </div>
-                <div>
+              <div className="!space-y-2">
                   <Label htmlFor="newPosition">Position</Label>
                   <Input
+                  className="!p-2"
                     id="newPosition"
                     value={newEmployee.position || ""}
                     onChange={(e) =>
@@ -353,18 +362,20 @@ export default function EmployeesManagement() {
               <TableCell>
                 <div className="flex gap-2">
                   <Button
+                   
                     size="icon"
                     variant="ghost"
                     onClick={() => handleEditEmployee(employee)}
-                    className="text-success hover:text-success"
+                    className="text-success hover:text-success !p-2"
                   >
                     <Edit className="w-4 h-4" />
                   </Button>
-                  <AlertDialog>
+                  <AlertDialog >
                     <AlertDialogTrigger asChild>
                       <Button
                         size="icon"
                         variant="ghost"
+                       
                         className="text-destructive hover:text-destructive"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -372,7 +383,7 @@ export default function EmployeesManagement() {
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                       <AlertDialogHeader>
-                        <div className="flex items-center justify-center mb-4">
+                        <div className="flex items-center justify-center !mb-4 !p-2">
                           <div className="w-12 h-12 bg-destructive/10 rounded-full flex items-center justify-center">
                             <AlertTriangle className="w-6 h-6 text-destructive" />
                           </div>
@@ -384,14 +395,14 @@ export default function EmployeesManagement() {
                           Are you sure you want to delete this Employee
                         </AlertDialogDescription>
                       </AlertDialogHeader>
-                      <AlertDialogFooter className="flex justify-center gap-4">
+                      <AlertDialogFooter className="flex justify-center gap-4 !p-2">
                         <AlertDialogAction
                           onClick={() => handleDeleteEmployee(employee.id)}
-                          className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                          className="bg-destructive text-destructive-foreground hover:bg-destructive/90 !p-2"
                         >
                           Yes
                         </AlertDialogAction>
-                        <AlertDialogCancel className="bg-foreground text-background hover:bg-foreground/90">
+                        <AlertDialogCancel className="bg-foreground text-background hover:bg-foreground/90 !p-2">
                           No
                         </AlertDialogCancel>
                       </AlertDialogFooter>
@@ -405,23 +416,26 @@ export default function EmployeesManagement() {
       </Table>
 
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl !p-2">
           <DialogHeader>
             <DialogTitle>Edit Employee</DialogTitle>
           </DialogHeader>
           {editingEmployee && (
-            <div className="space-y-4">
-              <div className="bg-muted p-4 rounded-lg">
-                <p className="text-sm text-muted-foreground">
-                  As a manager, Soul Man oversees team operations and ensures
-                  service standards are consistently met. He supports strategic
-                  planning, encourages collaboration, and drives performance.
-                  His leadership fosters a productive work environment focused
-                  on growth and efficiency.
-                </p>
+            <div className="!space-y-4">
+              <div className="bg-muted !p-4 rounded-lg">
+                <Textarea
+                  value={editingEmployee.description}
+                  onChange={(e) =>
+                    setEditingEmployee((prev) =>
+                      prev ? { ...prev, description: e.target.value } : null
+                    )
+                  }
+                  className="!mb-6 min-h-[100px] resize-none !p-2"
+                  placeholder="Description..."
+                />
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div>
+                <div className="!space-y-2">
                   <Label htmlFor="editFirstName">First Name</Label>
                   <Input
                     id="editFirstName"
@@ -439,9 +453,10 @@ export default function EmployeesManagement() {
                     }}
                   />
                 </div>
-                <div>
+                <div className="!space-y-2">
                   <Label htmlFor="editLastName">Last Name</Label>
                   <Input
+                    className="!p-2"
                     id="editLastName"
                     value={editingEmployee.name.split(" ")[1] || ""}
                     onChange={(e) => {
@@ -460,9 +475,10 @@ export default function EmployeesManagement() {
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div>
+                <div className="!space-y-2">
                   <Label htmlFor="editEmail">Email</Label>
                   <Input
+                    className="!p-2"
                     id="editEmail"
                     type="email"
                     value={editingEmployee.email || "naveen@gmail.com"}
@@ -473,9 +489,10 @@ export default function EmployeesManagement() {
                     }
                   />
                 </div>
-                <div>
+                <div className="!space-y-2">
                   <Label htmlFor="editPhone">Phone Number</Label>
                   <Input
+                    className="!p-2"
                     id="editPhone"
                     value={editingEmployee.phone || "+91 7568695210"}
                     onChange={(e) =>
@@ -487,9 +504,10 @@ export default function EmployeesManagement() {
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div>
+                <div className="!space-y-2">
                   <Label htmlFor="editDateOfBirth">Date Of Birth</Label>
                   <Input
+                    className="!p-2"
                     id="editDateOfBirth"
                     value={editingEmployee.dateOfBirth || "12/05/2004"}
                     onChange={(e) =>
@@ -499,9 +517,10 @@ export default function EmployeesManagement() {
                     }
                   />
                 </div>
-                <div>
+                <div className="!space-y-2">
                   <Label htmlFor="editPosition">Position</Label>
                   <Input
+                    className="!p-2"
                     id="editPosition"
                     value={editingEmployee.position || "Supervisor"}
                     onChange={(e) =>
@@ -512,9 +531,10 @@ export default function EmployeesManagement() {
                   />
                 </div>
               </div>
-              <div>
+              <div className="!space-y-2">
                 <Label htmlFor="editUsername">Username</Label>
                 <Input
+                  className="!p-2"
                   id="editUsername"
                   value={editingEmployee.username || "naveenkumar"}
                   onChange={(e) =>
