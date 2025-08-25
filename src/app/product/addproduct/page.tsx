@@ -141,9 +141,9 @@ const ProductForm = () => {
   };
 
   return (
-    <div className=" bg-background flex gap-4 !p-4 max-sm:!p-0">
+    <div className=" bg-background flex gap-4 !p-4 max-sm:!p-0 ">
       <Toaster position="top-right" />
-      <Aside />
+
       <div className="flex-1">
         <div className="flex items-center gap-4 !mb-6">
           <Button
@@ -157,7 +157,7 @@ const ProductForm = () => {
           <h1 className="text-2xl font-semibold text-foreground">Product</h1>
         </div>
 
-        <Card className="!p-6">
+        <Card className="!p-6 ">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-1">
               <div className="!space-y-4">
@@ -173,7 +173,7 @@ const ProductForm = () => {
                         className="w-full h-full object-cover rounded-lg"
                       />
                     ) : (
-                      <div className="text-center">
+                      <div className="flex flex-col items-center">
                         <ImagePlus className="h-12 w-12 text-muted-foreground mx-auto !mb-2" />
                         <p className="text-sm text-muted-foreground">
                           Click to upload image
@@ -194,6 +194,7 @@ const ProductForm = () => {
                   <Label htmlFor="product-name">Product Name:</Label>
                   <Input
                     id="product-name"
+                    placeholder="Enter product name"
                     value={formData.name}
                     onChange={(e) => handleInputChange("name", e.target.value)}
                     className="w-full !p-2"
@@ -204,6 +205,7 @@ const ProductForm = () => {
                   <Label htmlFor="category">Category:</Label>
                   <Input
                     id="category"
+                    placeholder="Enter product category"
                     value={formData.category}
                     onChange={(e) =>
                       handleInputChange("category", e.target.value)
@@ -216,6 +218,7 @@ const ProductForm = () => {
                   <Label htmlFor="price">Price:</Label>
                   <Input
                     id="price"
+                    placeholder="Enter product price"
                     value={formData.price}
                     onChange={(e) => handleInputChange("price", e.target.value)}
                     className="w-full !p-2"
@@ -226,6 +229,7 @@ const ProductForm = () => {
                   <Label htmlFor="product-id">Product ID:</Label>
                   <Input
                     id="product-id"
+                    placeholder="Enter product ID"
                     value={formData.productId}
                     onChange={(e) =>
                       handleInputChange("productId", e.target.value)
@@ -238,6 +242,7 @@ const ProductForm = () => {
                   <Label htmlFor="actual-price">Actual Price:</Label>
                   <Input
                     id="actual-price"
+                    placeholder="Enter actual price"
                     value={formData.actualPrice}
                     onChange={(e) =>
                       handleInputChange("actualPrice", e.target.value)
@@ -250,6 +255,7 @@ const ProductForm = () => {
                   <Label htmlFor="quantity">Product Quantity:</Label>
                   <Input
                     id="quantity"
+                    placeholder="Enter product quantity"
                     value={formData.quantity}
                     onChange={(e) =>
                       handleInputChange("quantity", e.target.value)
@@ -262,6 +268,7 @@ const ProductForm = () => {
                   <Label htmlFor="status">Status:</Label>
                   <Input
                     id="status"
+                    placeholder="Enter product status"
                     value={formData.status}
                     onChange={(e) =>
                       handleInputChange("status", e.target.value)
@@ -274,6 +281,7 @@ const ProductForm = () => {
                   <Label htmlFor="type">Type:</Label>
                   <Input
                     id="type"
+                    placeholder="Enter product type"
                     value={formData.type}
                     onChange={(e) => handleInputChange("type", e.target.value)}
                     className="w-full !p-2"
@@ -284,6 +292,7 @@ const ProductForm = () => {
                   <Label htmlFor="description">Description:</Label>
                   <Textarea
                     id="description"
+                    rows={4}
                     value={formData.description}
                     onChange={(e) =>
                       handleInputChange("description", e.target.value)
@@ -320,11 +329,11 @@ const ProductForm = () => {
 
         {/* Image Upload Dialog */}
         <Dialog open={isImageDialogOpen} onOpenChange={setIsImageDialogOpen}>
-          <DialogContent className="sm:max-w-md !p-2">
+          <DialogContent className="sm:max-w-md !p-6">
             <DialogHeader>
               <DialogTitle className="text-center">Upload Image</DialogTitle>
             </DialogHeader>
-            <div className="grid grid-cols-2 gap-4 !py-4">
+            <div className="grid grid-cols-2 gap-6 !py-4">
               <Button
                 onClick={handleCameraCapture}
                 variant="outline"

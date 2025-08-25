@@ -52,7 +52,7 @@ export default function Sidebar() {
           variant="ghost"
           size="icon"
           onClick={toggleMobileMenu}
-          className="fixed top-4 left-4 z-50 bg-white shadow-md hover:bg-gray-50  max-sm:top-5 max-sm:left-0  max-sm:!ml-2"
+          className="fixed top-14 left-4 z-50 bg-white shadow-md hover:bg-gray-50  max-sm:top-5 max-sm:left-0  max-sm:!ml-2"
         >
           <Menu className="h-5 w-5 text-primary" />
         </Button>

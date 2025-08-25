@@ -46,17 +46,23 @@ export default function Payment() {
     // Simulate payment processing
     setTimeout(() => {
       clearCart();
-      route.push(`/order-conform?orderId=${encodeURIComponent(orderId)}&method=${encodeURIComponent(method)}`);
+      route.push(
+        `/order-conform?orderId=${encodeURIComponent(
+          orderId
+        )}&method=${encodeURIComponent(method)}`
+      );
     }, 2000);
   };
 
   if (cart.length === 0) {
     return (
       <Layout>
-        <div className="max-w-4xl mx-auto !px-4 !py-8">
+        <div className="max-w-4xl mx-auto min-h-svh !px-4 !py-8">
           <div className="text-center">
             <h2 className="text-2xl font-bold mb-4">No items to pay for</h2>
-            <Button onClick={() => route.push("/")}>Browse Menu</Button>
+            <Button onClick={() => route.push("/")} className="!p-2">
+              Browse Menu
+            </Button>
           </div>
         </div>
       </Layout>
@@ -65,13 +71,13 @@ export default function Payment() {
 
   return (
     <Layout>
-      <div className=" !px-4 !py-6">
+      <div className=" !px-4 !py-6 max-sm:!px-0 max-sm:!py-0  ">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* QR Code Section */}
           <div className="flex flex-col items-center justify-center">
-            <Card className="w-full max-w-md">
+            <Card className="w-full ">
               <CardContent className="flex flex-col items-center !p-8">
-                <div className="w-64 h-64 bg-gray-100 rounded-lg flex items-center justify-center !mb-4">
+                <div className="w-80 h-64 bg-gray-100 rounded-lg flex items-center justify-center !mb-4">
                   <QrCode className="w-32 h-32 text-gray-400" />
                 </div>
                 <p className="text-center text-muted-foreground">
@@ -82,7 +88,7 @@ export default function Payment() {
           </div>
 
           {/* Payment Options */}
-          <div className="!space-y-6">
+          <div className="!space-y-6 ">
             <div className="text-center lg:text-left">
               <h1 className="text-2xl font-bold !mb-2">
                 Choose Payment Method

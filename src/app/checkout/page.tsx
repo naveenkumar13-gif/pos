@@ -43,38 +43,38 @@ export default function Checkout() {
     route.push("/payment");
   };
 
-  // if (cart.length === 0) {
-  //   return (
-  //     <Layout>
-  //       <div className="min-h-screen !px-4 !py-8 flex items-center justify-center">
-  //         <div className="text-center rounded-2xl !p-8 border border-gray-100 max-w-md w-full">
-  //           <div className="flex justify-center !mb-6">
-  //             <div className="bg-indigo-100 !p-6 rounded-full">
-  //               <ShoppingCart className="w-16 h-16 text-red-500" />
-  //             </div>
-  //           </div>
-  //           <h2 className="text-3xl font-extrabold text-gray-800 !mb-2">
-  //             Your Cart is Empty
-  //           </h2>
-  //           <p className="text-gray-500 !mb-6">
-  //             Looks like you haven’t added anything yet. Let’s find something
-  //             delicious!
-  //           </p>
-  //           <Button
-  //             onClick={() => route.push("/")}
-  //             className="!px-6 !py-2 rounded-lg bg-gradient-to-r from-red-500 to-red-600 text-white font-medium shadow-md hover:shadow-lg hover:from-red-600 hover:to-red-700 transition-all duration-300"
-  //           >
-  //             Browse Menu
-  //           </Button>
-  //         </div>
-  //       </div>
-  //     </Layout>
-  //   );
-  // }
+  if (cart.length === 0) {
+    return (
+      <Layout>
+        <div className="min-h-screen !px-4 !py-8 flex items-center justify-center">
+          <div className="text-center rounded-2xl !p-8 border border-gray-100 max-w-md w-full">
+            <div className="flex justify-center !mb-6">
+              <div className="bg-indigo-100 !p-6 rounded-full">
+                <ShoppingCart className="w-16 h-16 text-red-500" />
+              </div>
+            </div>
+            <h2 className="text-3xl font-extrabold text-gray-800 !mb-2">
+              Your Cart is Empty
+            </h2>
+            <p className="text-gray-500 !mb-6">
+              Looks like you haven’t added anything yet. Let’s find something
+              delicious!
+            </p>
+            <Button
+              onClick={() => route.push("/")}
+              className="!px-6 !py-2 rounded-lg bg-gradient-to-r from-red-500 to-red-600 text-white font-medium shadow-md hover:shadow-lg hover:from-red-600 hover:to-red-700 transition-all duration-300"
+            >
+              Browse Menu
+            </Button>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
-      <div className=" !px-4 !py-6 ">
+      <div className=" !px-4 !py-6 max-sm:!px-0 max-sm:!py-0 ">
         <h1 className="text-2xl font-bold !mb-6">Order {orderId}</h1>
 
         <form
@@ -256,9 +256,6 @@ export default function Checkout() {
                 </div>
 
                 <div className="!space-y-2">
-                  <Button variant="outline" className="w-full">
-                    Print
-                  </Button>
                   <Button
                     type="submit"
                     className="w-full bg-primary hover:bg-primary/90"

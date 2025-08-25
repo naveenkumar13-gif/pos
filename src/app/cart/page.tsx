@@ -40,8 +40,8 @@ function CartAside() {
           <div className="flex flex-col justify-between gap-4 h-full  ">
             <OrderItem />
             {cart && (
-              <div className=" flex flex-col gap-4 border border-gray-400 !p-2 rounded-md">
-                <div className="flex justify-between">
+              <div className=" flex flex-col gap-4 rounded-md  shadow-2xs border !p-2 ">
+                <div className="flex justify-between ">
                   <h2 className="text-xl sm:text-2xl font-bold ">Subtotal:</h2>
                   <h2 className="text-xl sm:text-2xl font-bold text-[#ff0000]">
                     ₹{getTotalPrice()}

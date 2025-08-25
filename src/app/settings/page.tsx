@@ -34,7 +34,7 @@ const Index = () => {
         onSectionChange={setActiveSection}
         onPhotoEdit={() => setIsPhotoEditorOpen(true)}
       />
-      <div className="flex-1 !p-6 max-sm:!p-3">{renderContent()}</div>
+      <div className="flex-1 !p-6 max-md:!p-4">{renderContent()}</div>
       <PhotoEditor
         isOpen={isPhotoEditorOpen}
         onClose={() => setIsPhotoEditorOpen(false)}

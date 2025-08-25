@@ -173,7 +173,7 @@ export default function EmployeesManagement() {
   return (
     <>
       {contextHolder}
-      <div className="max-w-5xl !p-4 max-sm:!p-0 ">
+      <div className="max-w-5xl !p-4  max-md:!p-2  ">
         <div className="flex justify-between items-center !mb-6">
           <h2 className="text-2xl font-bold">Employees</h2>
           <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
@@ -351,7 +351,7 @@ export default function EmployeesManagement() {
           </Dialog>
         </div>
 
-        <Table>
+        <Table className="">
           <TableHeader>
             <TableRow>
               <TableHead>Name</TableHead>
@@ -359,9 +359,12 @@ export default function EmployeesManagement() {
               <TableHead>Action</TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody className="overflow-hidden ">
             {employees.map((employee) => (
-              <TableRow key={employee.id} className="!p-4   ">
+              <TableRow
+                key={employee.id}
+                className="!p-4 space-x-2  overflow-x-scroll"
+              >
                 <TableCell>{employee.name}</TableCell>
                 <TableCell>{employee.employeeId}</TableCell>
                 <TableCell>
@@ -425,7 +428,7 @@ export default function EmployeesManagement() {
             </DialogHeader>
             {editingEmployee && (
               <div className="!space-y-4">
-                <div className="bg-muted !p-4 rounded-lg">
+                <div className=" !p-4 rounded-lg">
                   <Textarea
                     value={editingEmployee.description}
                     onChange={(e) =>

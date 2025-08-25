@@ -54,7 +54,6 @@ export const CustomerTable = ({
         </Button>
       </div>
 
-      
       <div className="relative max-w-md">
         <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
         <Input
@@ -66,7 +65,7 @@ export const CustomerTable = ({
       </div>
 
       {/* Mobile Cards */}
-      <div className="block md:hidden !space-y-4">
+      <div className="hidden  max-md:block !space-y-4">
         {filteredCustomers.map((customer) => (
           <Card key={customer.id} className="!p-4">
             <div className="flex items-start gap-3">
@@ -124,7 +123,7 @@ export const CustomerTable = ({
       </div>
 
       {/* Desktop Table */}
-      <Card className="hidden md:block overflow-hidden">
+      <Card className="max-md:hidden overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-muted !p-2">

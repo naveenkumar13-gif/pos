@@ -12,6 +12,7 @@ function OrderItem() {
   return (
     <div className="">
       <div className="flex items-center justify-between !mb-6  ">
+        {/* static */}
         <h2>Order #7465738</h2>
         <span>
           <FontAwesomeIcon
@@ -33,7 +34,7 @@ function OrderItem() {
             <h3 className="text-lg font-semibold tex-red-300">{item.name}</h3>
             <p className="text-gray-600">₹{item.price}</p>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-3">
             {" "}
             <button
               className="bg-gray-00 text-gray-600 border border-gray-200 font-semibold !py-1 !px-2 rounded-md text-sm cursor-pointer"

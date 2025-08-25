@@ -14,7 +14,7 @@ function Header() {
   const route = useRouter();
 
   return (
-    <div className="!px-20 max-sm:!px-0">
+    <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-20 2xl:px-24">
       <div className="flex items-center justify-around gap-6 !p-4 ">
         <div className="max-sm:flex max-sm:items-center max-sm:justify-between max-sm:w-full">
           <div>

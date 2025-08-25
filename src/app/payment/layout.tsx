@@ -8,8 +8,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-      <main className="pb-20 md:pb-0">{children}</main>
+      <main className="!px-10 max-md:!p-8 max-sm:!p-4 max-w-4xl !mx-auto">{children}</main>
     </div>
   );
 }

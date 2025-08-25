@@ -121,7 +121,7 @@ const ProductTable = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background  !p-4 !md:p-6">
+    <div className="min-h-screen bg-background  !p-4 ">
       <div className=" ">
         <div
           className="!mb-6  flex items-center justify-between "
@@ -135,8 +135,8 @@ const ProductTable = () => {
             Add Product
           </Button>
         </div>
-        <Card className="hidden md:block  !p-1">
-          <CardContent className=" !m-2 ">
+        <Card className=" !p-1  max-sm:!p-0 overflow-hidden max-sm:hidden">
+          <CardContent className=" !m-2 overflow-x-scroll">
             <Table>
               <TableHeader>
                 <TableRow className="">
@@ -306,7 +306,7 @@ const ProductTable = () => {
             </Table>
           </CardContent>
         </Card>
-        <div className="!space-y-4 md:hidden ">
+        <div className="!space-y-4  max-sm:block hidden  ">
           {products.map((product) => (
             <Card key={product.id} className="!p-3">
               <CardHeader className="!pb-3">
