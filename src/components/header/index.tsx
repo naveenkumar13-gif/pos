@@ -16,7 +16,7 @@ function Header() {
   return (
     <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-20 2xl:px-24">
       <div className="flex items-center justify-around gap-6 !p-4 ">
-        <div className="max-sm:flex max-sm:items-center max-sm:justify-between max-sm:w-full">
+        <div className="max-sm:flex max-sm:items-center max-sm:justify-around">
           <div>
             <h1 className="text-2xl font-bold mr-6">
               Bill <span className="text-red-500">Mate</span>

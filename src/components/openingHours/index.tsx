@@ -40,7 +40,7 @@ export default function OpeningHours() {
   if (isEditing) {
     return (
       <div className="max-w-2xl ">
-        <div className="flex items-center gap-4 !mb-6 justify-between max-sm:w-full bg-red-50">
+        <div className="flex items-center gap-4 !mb-6 justify-between max-sm:w-full">
           <div className="flex items-center gap-4">
             <Button
               variant="ghost"

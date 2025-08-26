@@ -65,7 +65,7 @@ export const CustomerTable = ({
       </div>
 
       {/* Mobile Cards */}
-      <div className="hidden  max-md:block !space-y-4">
+      <div className="hidden  max-sm:block !space-y-4">
         {filteredCustomers.map((customer) => (
           <Card key={customer.id} className="!p-4">
             <div className="flex items-start gap-3">
@@ -123,7 +123,7 @@ export const CustomerTable = ({
       </div>
 
       {/* Desktop Table */}
-      <Card className="max-md:hidden overflow-hidden">
+      <Card className="max-sm:hidden overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-muted !p-2">
