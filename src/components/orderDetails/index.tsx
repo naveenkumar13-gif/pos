@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "../statusBadge";
 import { OrderItem } from "../orderitems";
-import { use, useState } from "react";
+import { useState } from "react";
 import useCartStore from "@/store/useCart";
 import PrintPopUp from "../printPopUp";
 
@@ -17,6 +17,7 @@ interface OrderDetailsProps {
   //   name: string;
   //   quantity: number;
   //   price: number;
+  //   image?: string;
   // }>;
 }
 
@@ -31,7 +32,7 @@ export const OrderDetails = ({
   const { cart } = useCartStore();
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="flex-1 !p-6">
+    <div className="flex-1 !p-6 ">
       <div className="flex justify-between items-center !mb-8">
         <h2 className="text-xl font-bold">{orderId}</h2>
         <StatusBadge status={status} />

@@ -6,7 +6,7 @@ interface OrderItemProps {
   name: string;
   quantity: number;
   price: number;
-  image?: string;
+  image: typeof product;
 }
 
 export const OrderItem = ({ name, quantity, price, image }: OrderItemProps) => {

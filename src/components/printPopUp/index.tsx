@@ -18,7 +18,7 @@ export default function PrintPopUp({ setIsOpen }: PrintPopUpProps) {
         className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-50 "
         onClick={() => setIsOpen(false)}
       ></div>
-      <div className="fixed  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white !p-6 z-50 rounded-md shadow-lg  w-[80%] ">
+      <div className="fixed  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white !p-6 z-50 rounded-md shadow-lg  w-[70%] ">
         <div className="flex flex-col gap-4">
           <h2 className="text-lg font-semibold mb-4">oredr #52142167</h2>
           <div className="!pb-8 border-b border-gray-400 flex flex-col gap-2">

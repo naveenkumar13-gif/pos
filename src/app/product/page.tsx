@@ -135,8 +135,8 @@ const ProductTable = () => {
             Add Product
           </Button>
         </div>
-        <Card className=" !p-1  max-sm:!p-0 overflow-hidden max-sm:hidden">
-          <CardContent className=" !m-2 overflow-x-scroll">
+        <Card className=" !p-1  max-sm:!p-0 ">
+          <CardContent className=" !m-2 ">
             <Table>
               <TableHeader>
                 <TableRow className="">

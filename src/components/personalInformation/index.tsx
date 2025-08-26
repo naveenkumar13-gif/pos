@@ -19,15 +19,18 @@ export default function PersonalInformation() {
       "As a manager, Soul Man oversees team operations and ensures service standards are consistently met. He supports strategic planning, encourages collaboration, and drives performance. His leadership fosters a productive work environment focused on growth and efficiency.",
   });
 
+  const [messageApi, contextHolder] = message.useMessage();
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSave = () => {
-    message.success("Personal Information saved successfully!");
+    messageApi.success("Personal Information saved successfully!");
   };
 
   return (
+  <>
+  {contextHolder}
     <div className="max-w-4xl   ">
       <h2 className="text-2xl font-bold !mb-2">Personal Information</h2>
       <Textarea
@@ -42,6 +45,7 @@ export default function PersonalInformation() {
           <Label htmlFor="firstName">First Name</Label>
           <Input
             id="firstName"
+            placeholder="First Name"
             value={formData.firstName}
             onChange={(e) => handleInputChange("firstName", e.target.value)}
             className="!p-2"
@@ -52,6 +56,7 @@ export default function PersonalInformation() {
           <Input
             className="!p-2"
             id="lastName"
+            placeholder="Last Name"
             value={formData.lastName}
             onChange={(e) => handleInputChange("lastName", e.target.value)}
           />
@@ -67,6 +72,7 @@ export default function PersonalInformation() {
             type="email"
             value={formData.email}
             onChange={(e) => handleInputChange("email", e.target.value)}
+            placeholder="Email"
           />
         </div>
         <div className="!space-y-2">
@@ -76,6 +82,7 @@ export default function PersonalInformation() {
             id="phone"
             value={formData.phone}
             onChange={(e) => handleInputChange("phone", e.target.value)}
+            placeholder="Phone Number"
           />
         </div>
       </div>
@@ -88,6 +95,7 @@ export default function PersonalInformation() {
             id="dateOfBirth"
             value={formData.dateOfBirth}
             onChange={(e) => handleInputChange("dateOfBirth", e.target.value)}
+            placeholder="Date Of Birth"
           />
         </div>
         <div className="!space-y-2">
@@ -97,6 +105,7 @@ export default function PersonalInformation() {
             id="position"
             value={formData.position}
             onChange={(e) => handleInputChange("position", e.target.value)}
+            placeholder="Position"
           />
         </div>
       </div>
@@ -105,5 +114,6 @@ export default function PersonalInformation() {
         Save Changes
       </Button>
     </div>
+  </>
   );
 }
